@@ -33,12 +33,32 @@ def obter_dados_ligas(codigo_liga, escolha_season):
         tabela_formatada = []
         
         if 'standings' in dados:
-            for item in dados['standings'][0]['table']:
+            # Find specific tables ensuring we get TOTAL, HOME, and AWAY
+            tabela_total = next((s['table'] for s in dados['standings'] if s['type'] == 'TOTAL'), [])
+            tabela_home = next((s['table'] for s in dados['standings'] if s['type'] == 'HOME'), [])
+            tabela_away = next((s['table'] for s in dados['standings'] if s['type'] == 'AWAY'), [])
+            
+            # Map Home/Away goals by team name for easy lookup
+            dict_home = {t['team']['name']: t['goalsFor'] for t in tabela_home}
+            dict_away = {t['team']['name']: t['goalsFor'] for t in tabela_away}
+
+            for item in tabela_total:
+                nome_time = item['team']['name']
                 dados_time = {
-                    "nome": item['team']['name'],
+                    "posicao": item['position'],
+                    "escudo": item['team']['crest'],
+                    "nome": nome_time,
+                    "pontos": item['points'],
+                    "jogos": item['playedGames'],
+                    "vitorias": item['won'],
+                    "empates": item['draw'],
+                    "derrotas": item['lost'],
                     "gols_pro": item['goalsFor'],
                     "gols_contra": item['goalsAgainst'],
-                    "pontos": item['points']
+                    "saldo_gols": item['goalDifference'],
+                    # New helper columns for Home/Away analysis
+                    "gols_casa": dict_home.get(nome_time, 0),
+                    "gols_fora": dict_away.get(nome_time, 0)
                 }
                 tabela_formatada.append(dados_time)
                 
@@ -49,7 +69,7 @@ def obter_dados_ligas(codigo_liga, escolha_season):
 
 def melhor_ataque(df_tabela):
     try:
-        melhor_ataque = df_tabela.loc[df_tabela['gols_pro'].idxmax()]
+        melhor_ataque = df_tabela.loc[df_tabela['GP'].idxmax()]
         return melhor_ataque
     except Exception as e:
         print(f"Erro ao obter dados: {e}")
@@ -57,7 +77,7 @@ def melhor_ataque(df_tabela):
 
 def melhor_defesa(df_tabela):
     try:
-        melhor_defesa = df_tabela.loc[df_tabela['gols_contra'].idxmin()]
+        melhor_defesa = df_tabela.loc[df_tabela['GC'].idxmin()]
         return melhor_defesa
     except Exception as e:
         print(f"Erro ao obter dados: {e}")
@@ -91,3 +111,24 @@ def obter_dados_artilheiros(codigo_liga, escolha_season):
     except Exception as e:
         print(f"Erro ao obter dados: {e}")
         return None 
+
+def obter_dados_historicos(codigo_liga, temporada_atual):
+    """
+    Busca dados da temporada atual e das 2 anteriores.
+    Retorna um dicionario: { '2025': [dados], '2024': [dados], ... }
+    """
+    historico = {}
+    try:
+        ano_atual = int(temporada_atual)
+        # 3 years including current
+        anos = range(ano_atual, ano_atual - 3, -1) 
+        
+        for ano in anos:
+            dados_ano = obter_dados_ligas(codigo_liga, str(ano))
+            if dados_ano:
+                historico[str(ano)] = dados_ano
+            
+        return historico
+    except Exception as e:
+        print(f"Erro ao obter historico: {e}")
+        return historico 
