@@ -1,6 +1,7 @@
 import requests
 import json
 import pandas as pd
+import streamlit as st
 from data_frames import *
 
 def obter_codigo_liga(nome_liga):
@@ -21,7 +22,7 @@ def obter_dados_ligas(codigo_liga, escolha_season):
     try:
         url = f"https://api.football-data.org/v4/competitions/{codigo_liga}/standings"
         headers = {
-            "X-Auth-Token": "93029a6429024c46abe457d02cdc19ff" 
+            "X-Auth-Token": st.secrets["API_TOKEN"]
         }
         params = {
             "season": escolha_season
@@ -86,7 +87,7 @@ def obter_dados_artilheiros(codigo_liga, escolha_season):
     try:
         url = f"https://api.football-data.org/v4/competitions/{codigo_liga}/scorers"
         headers = {
-            "X-Auth-Token": "93029a6429024c46abe457d02cdc19ff" 
+            "X-Auth-Token": st.secrets["API_TOKEN"]
         }
         params = {
             "season": escolha_season
