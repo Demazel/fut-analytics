@@ -1,0 +1,122 @@
+[
+    {
+        "nome": "CR Flamengo",
+        "gols_pro": 78,
+        "gols_contra": 27,
+        "pontos": 79
+    },
+    {
+        "nome": "SE Palmeiras",
+        "gols_pro": 66,
+        "gols_contra": 33,
+        "pontos": 76
+    },
+    {
+        "nome": "Cruzeiro EC",
+        "gols_pro": 55,
+        "gols_contra": 31,
+        "pontos": 70
+    },
+    {
+        "nome": "Mirassol FC",
+        "gols_pro": 63,
+        "gols_contra": 39,
+        "pontos": 67
+    },
+    {
+        "nome": "Fluminense FC",
+        "gols_pro": 50,
+        "gols_contra": 39,
+        "pontos": 64
+    },
+    {
+        "nome": "Botafogo FR",
+        "gols_pro": 58,
+        "gols_contra": 38,
+        "pontos": 63
+    },
+    {
+        "nome": "EC Bahia",
+        "gols_pro": 50,
+        "gols_contra": 46,
+        "pontos": 60
+    },
+    {
+        "nome": "São Paulo FC",
+        "gols_pro": 43,
+        "gols_contra": 47,
+        "pontos": 51
+    },
+    {
+        "nome": "Grêmio FBPA",
+        "gols_pro": 47,
+        "gols_contra": 50,
+        "pontos": 49
+    },
+    {
+        "nome": "CA Mineiro",
+        "gols_pro": 43,
+        "gols_contra": 44,
+        "pontos": 48
+    },
+    {
+        "nome": "RB Bragantino",
+        "gols_pro": 45,
+        "gols_contra": 57,
+        "pontos": 48
+    },
+    {
+        "nome": "Santos FC",
+        "gols_pro": 45,
+        "gols_contra": 50,
+        "pontos": 47
+    },
+    {
+        "nome": "SC Corinthians Paulista",
+        "gols_pro": 42,
+        "gols_contra": 47,
+        "pontos": 47
+    },
+    {
+        "nome": "CR Vasco da Gama",
+        "gols_pro": 55,
+        "gols_contra": 60,
+        "pontos": 45
+    },
+    {
+        "nome": "EC Vitória",
+        "gols_pro": 35,
+        "gols_contra": 52,
+        "pontos": 45
+    },
+    {
+        "nome": "SC Internacional",
+        "gols_pro": 44,
+        "gols_contra": 57,
+        "pontos": 44
+    },
+    {
+        "nome": "Ceará SC",
+        "gols_pro": 34,
+        "gols_contra": 40,
+        "pontos": 43
+    },
+    {
+        "nome": "Fortaleza EC",
+        "gols_pro": 43,
+        "gols_contra": 58,
+        "pontos": 43
+    },
+    {
+        "nome": "EC Juventude",
+        "gols_pro": 35,
+        "gols_contra": 69,
+        "pontos": 35
+    },
+    {
+        "nome": "SC Recife",
+        "gols_pro": 28,
+        "gols_contra": 75,
+        "pontos": 17
+    }
+]

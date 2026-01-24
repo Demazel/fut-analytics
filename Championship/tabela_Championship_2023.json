@@ -1,0 +1,146 @@
+[
+    {
+        "nome": "Leicester City FC",
+        "gols_pro": 89,
+        "gols_contra": 41,
+        "pontos": 97
+    },
+    {
+        "nome": "Ipswich Town FC",
+        "gols_pro": 92,
+        "gols_contra": 57,
+        "pontos": 96
+    },
+    {
+        "nome": "Leeds United FC",
+        "gols_pro": 85,
+        "gols_contra": 44,
+        "pontos": 94
+    },
+    {
+        "nome": "Southampton FC",
+        "gols_pro": 91,
+        "gols_contra": 64,
+        "pontos": 94
+    },
+    {
+        "nome": "West Bromwich Albion FC",
+        "gols_pro": 71,
+        "gols_contra": 50,
+        "pontos": 76
+    },
+    {
+        "nome": "Norwich City FC",
+        "gols_pro": 79,
+        "gols_contra": 68,
+        "pontos": 74
+    },
+    {
+        "nome": "Hull City AFC",
+        "gols_pro": 68,
+        "gols_contra": 60,
+        "pontos": 70
+    },
+    {
+        "nome": "Middlesbrough FC",
+        "gols_pro": 71,
+        "gols_contra": 62,
+        "pontos": 69
+    },
+    {
+        "nome": "Coventry City FC",
+        "gols_pro": 70,
+        "gols_contra": 59,
+        "pontos": 64
+    },
+    {
+        "nome": "Preston North End FC",
+        "gols_pro": 56,
+        "gols_contra": 67,
+        "pontos": 63
+    },
+    {
+        "nome": "Bristol City FC",
+        "gols_pro": 53,
+        "gols_contra": 51,
+        "pontos": 62
+    },
+    {
+        "nome": "Cardiff City FC",
+        "gols_pro": 53,
+        "gols_contra": 70,
+        "pontos": 62
+    },
+    {
+        "nome": "Millwall FC",
+        "gols_pro": 45,
+        "gols_contra": 55,
+        "pontos": 59
+    },
+    {
+        "nome": "Swansea City AFC",
+        "gols_pro": 59,
+        "gols_contra": 65,
+        "pontos": 57
+    },
+    {
+        "nome": "Watford FC",
+        "gols_pro": 61,
+        "gols_contra": 61,
+        "pontos": 56
+    },
+    {
+        "nome": "Sunderland AFC",
+        "gols_pro": 52,
+        "gols_contra": 54,
+        "pontos": 56
+    },
+    {
+        "nome": "Stoke City FC",
+        "gols_pro": 49,
+        "gols_contra": 60,
+        "pontos": 56
+    },
+    {
+        "nome": "Queens Park Rangers FC",
+        "gols_pro": 47,
+        "gols_contra": 58,
+        "pontos": 56
+    },
+    {
+        "nome": "Blackburn Rovers FC",
+        "gols_pro": 60,
+        "gols_contra": 74,
+        "pontos": 53
+    },
+    {
+        "nome": "Sheffield Wednesday FC",
+        "gols_pro": 44,
+        "gols_contra": 68,
+        "pontos": 53
+    },
+    {
+        "nome": "Plymouth Argyle FC",
+        "gols_pro": 59,
+        "gols_contra": 70,
+        "pontos": 51
+    },
+    {
+        "nome": "Birmingham City FC",
+        "gols_pro": 50,
+        "gols_contra": 65,
+        "pontos": 50
+    },
+    {
+        "nome": "Huddersfield Town AFC",
+        "gols_pro": 48,
+        "gols_contra": 77,
+        "pontos": 45
+    },
+    {
+        "nome": "Rotherham United FC",
+        "gols_pro": 37,
+        "gols_contra": 89,
+        "pontos": 27
+    }
+]

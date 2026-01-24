@@ -1,0 +1,110 @@
+[
+    {
+        "nome": "Bayer 04 Leverkusen",
+        "gols_pro": 89,
+        "gols_contra": 24,
+        "pontos": 90
+    },
+    {
+        "nome": "VfB Stuttgart",
+        "gols_pro": 78,
+        "gols_contra": 39,
+        "pontos": 73
+    },
+    {
+        "nome": "FC Bayern München",
+        "gols_pro": 94,
+        "gols_contra": 45,
+        "pontos": 72
+    },
+    {
+        "nome": "RB Leipzig",
+        "gols_pro": 77,
+        "gols_contra": 39,
+        "pontos": 65
+    },
+    {
+        "nome": "Borussia Dortmund",
+        "gols_pro": 68,
+        "gols_contra": 43,
+        "pontos": 63
+    },
+    {
+        "nome": "Eintracht Frankfurt",
+        "gols_pro": 51,
+        "gols_contra": 50,
+        "pontos": 47
+    },
+    {
+        "nome": "TSG 1899 Hoffenheim",
+        "gols_pro": 66,
+        "gols_contra": 66,
+        "pontos": 46
+    },
+    {
+        "nome": "1. FC Heidenheim 1846",
+        "gols_pro": 50,
+        "gols_contra": 55,
+        "pontos": 42
+    },
+    {
+        "nome": "SV Werder Bremen",
+        "gols_pro": 48,
+        "gols_contra": 54,
+        "pontos": 42
+    },
+    {
+        "nome": "SC Freiburg",
+        "gols_pro": 45,
+        "gols_contra": 58,
+        "pontos": 42
+    },
+    {
+        "nome": "FC Augsburg",
+        "gols_pro": 50,
+        "gols_contra": 60,
+        "pontos": 39
+    },
+    {
+        "nome": "VfL Wolfsburg",
+        "gols_pro": 41,
+        "gols_contra": 56,
+        "pontos": 37
+    },
+    {
+        "nome": "1. FSV Mainz 05",
+        "gols_pro": 39,
+        "gols_contra": 51,
+        "pontos": 35
+    },
+    {
+        "nome": "Borussia Mönchengladbach",
+        "gols_pro": 56,
+        "gols_contra": 67,
+        "pontos": 34
+    },
+    {
+        "nome": "1. FC Union Berlin",
+        "gols_pro": 33,
+        "gols_contra": 58,
+        "pontos": 33
+    },
+    {
+        "nome": "VfL Bochum 1848",
+        "gols_pro": 42,
+        "gols_contra": 74,
+        "pontos": 33
+    },
+    {
+        "nome": "1. FC Köln",
+        "gols_pro": 28,
+        "gols_contra": 60,
+        "pontos": 27
+    },
+    {
+        "nome": "SV Darmstadt 98",
+        "gols_pro": 30,
+        "gols_contra": 86,
+        "pontos": 17
+    }
+]

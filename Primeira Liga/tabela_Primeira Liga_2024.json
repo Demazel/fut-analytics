@@ -1,0 +1,110 @@
+[
+    {
+        "nome": "Sporting Clube de Portugal",
+        "gols_pro": 88,
+        "gols_contra": 27,
+        "pontos": 82
+    },
+    {
+        "nome": "Sport Lisboa e Benfica",
+        "gols_pro": 84,
+        "gols_contra": 28,
+        "pontos": 80
+    },
+    {
+        "nome": "FC Porto",
+        "gols_pro": 65,
+        "gols_contra": 30,
+        "pontos": 71
+    },
+    {
+        "nome": "Sporting Clube de Braga",
+        "gols_pro": 55,
+        "gols_contra": 30,
+        "pontos": 66
+    },
+    {
+        "nome": "CD Santa Clara",
+        "gols_pro": 36,
+        "gols_contra": 32,
+        "pontos": 57
+    },
+    {
+        "nome": "Vitória SC",
+        "gols_pro": 47,
+        "gols_contra": 37,
+        "pontos": 54
+    },
+    {
+        "nome": "FC Famalicão",
+        "gols_pro": 44,
+        "gols_contra": 39,
+        "pontos": 47
+    },
+    {
+        "nome": "GD Estoril Praia",
+        "gols_pro": 48,
+        "gols_contra": 53,
+        "pontos": 46
+    },
+    {
+        "nome": "Casa Pia AC",
+        "gols_pro": 39,
+        "gols_contra": 44,
+        "pontos": 45
+    },
+    {
+        "nome": "Moreirense FC",
+        "gols_pro": 42,
+        "gols_contra": 50,
+        "pontos": 40
+    },
+    {
+        "nome": "FC Arouca",
+        "gols_pro": 35,
+        "gols_contra": 49,
+        "pontos": 38
+    },
+    {
+        "nome": "Rio Ave FC",
+        "gols_pro": 39,
+        "gols_contra": 55,
+        "pontos": 38
+    },
+    {
+        "nome": "Gil Vicente FC",
+        "gols_pro": 34,
+        "gols_contra": 47,
+        "pontos": 34
+    },
+    {
+        "nome": "CD Nacional",
+        "gols_pro": 32,
+        "gols_contra": 50,
+        "pontos": 34
+    },
+    {
+        "nome": "CF Estrela da Amadora",
+        "gols_pro": 24,
+        "gols_contra": 50,
+        "pontos": 29
+    },
+    {
+        "nome": "SC Farense",
+        "gols_pro": 25,
+        "gols_contra": 46,
+        "pontos": 27
+    },
+    {
+        "nome": "AVS",
+        "gols_pro": 25,
+        "gols_contra": 60,
+        "pontos": 27
+    },
+    {
+        "nome": "Boavista FC",
+        "gols_pro": 24,
+        "gols_contra": 59,
+        "pontos": 24
+    }
+]

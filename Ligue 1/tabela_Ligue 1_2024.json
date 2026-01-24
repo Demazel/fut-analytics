@@ -1,0 +1,110 @@
+[
+    {
+        "nome": "Paris Saint-Germain FC",
+        "gols_pro": 92,
+        "gols_contra": 35,
+        "pontos": 84
+    },
+    {
+        "nome": "Olympique de Marseille",
+        "gols_pro": 74,
+        "gols_contra": 47,
+        "pontos": 65
+    },
+    {
+        "nome": "AS Monaco FC",
+        "gols_pro": 63,
+        "gols_contra": 41,
+        "pontos": 61
+    },
+    {
+        "nome": "OGC Nice",
+        "gols_pro": 66,
+        "gols_contra": 41,
+        "pontos": 60
+    },
+    {
+        "nome": "Lille OSC",
+        "gols_pro": 52,
+        "gols_contra": 36,
+        "pontos": 60
+    },
+    {
+        "nome": "Olympique Lyonnais",
+        "gols_pro": 65,
+        "gols_contra": 46,
+        "pontos": 57
+    },
+    {
+        "nome": "RC Strasbourg Alsace",
+        "gols_pro": 56,
+        "gols_contra": 44,
+        "pontos": 57
+    },
+    {
+        "nome": "Racing Club de Lens",
+        "gols_pro": 42,
+        "gols_contra": 39,
+        "pontos": 52
+    },
+    {
+        "nome": "Stade Brestois 29",
+        "gols_pro": 52,
+        "gols_contra": 59,
+        "pontos": 50
+    },
+    {
+        "nome": "Toulouse FC",
+        "gols_pro": 44,
+        "gols_contra": 43,
+        "pontos": 42
+    },
+    {
+        "nome": "AJ Auxerre",
+        "gols_pro": 48,
+        "gols_contra": 51,
+        "pontos": 42
+    },
+    {
+        "nome": "Stade Rennais FC 1901",
+        "gols_pro": 51,
+        "gols_contra": 50,
+        "pontos": 41
+    },
+    {
+        "nome": "FC Nantes",
+        "gols_pro": 39,
+        "gols_contra": 52,
+        "pontos": 36
+    },
+    {
+        "nome": "Angers SCO",
+        "gols_pro": 32,
+        "gols_contra": 53,
+        "pontos": 36
+    },
+    {
+        "nome": "Le Havre AC",
+        "gols_pro": 40,
+        "gols_contra": 71,
+        "pontos": 34
+    },
+    {
+        "nome": "Stade de Reims",
+        "gols_pro": 33,
+        "gols_contra": 47,
+        "pontos": 33
+    },
+    {
+        "nome": "AS Saint-Étienne",
+        "gols_pro": 37,
+        "gols_contra": 77,
+        "pontos": 27
+    },
+    {
+        "nome": "Montpellier HSC",
+        "gols_pro": 23,
+        "gols_contra": 77,
+        "pontos": 16
+    }
+]

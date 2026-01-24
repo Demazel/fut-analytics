@@ -1,0 +1,110 @@
+[
+    {
+        "nome": "Racing Club de Lens",
+        "gols_pro": 32,
+        "gols_contra": 13,
+        "pontos": 43
+    },
+    {
+        "nome": "Paris Saint-Germain FC",
+        "gols_pro": 40,
+        "gols_contra": 15,
+        "pontos": 42
+    },
+    {
+        "nome": "Olympique de Marseille",
+        "gols_pro": 41,
+        "gols_contra": 19,
+        "pontos": 35
+    },
+    {
+        "nome": "Olympique Lyonnais",
+        "gols_pro": 27,
+        "gols_contra": 18,
+        "pontos": 33
+    },
+    {
+        "nome": "Lille OSC",
+        "gols_pro": 33,
+        "gols_contra": 25,
+        "pontos": 32
+    },
+    {
+        "nome": "Stade Rennais FC 1901",
+        "gols_pro": 30,
+        "gols_contra": 25,
+        "pontos": 31
+    },
+    {
+        "nome": "RC Strasbourg Alsace",
+        "gols_pro": 28,
+        "gols_contra": 22,
+        "pontos": 27
+    },
+    {
+        "nome": "Toulouse FC",
+        "gols_pro": 29,
+        "gols_contra": 23,
+        "pontos": 26
+    },
+    {
+        "nome": "AS Monaco FC",
+        "gols_pro": 28,
+        "gols_contra": 33,
+        "pontos": 23
+    },
+    {
+        "nome": "Stade Brestois 29",
+        "gols_pro": 24,
+        "gols_contra": 29,
+        "pontos": 22
+    },
+    {
+        "nome": "Angers SCO",
+        "gols_pro": 20,
+        "gols_contra": 25,
+        "pontos": 22
+    },
+    {
+        "nome": "FC Lorient",
+        "gols_pro": 23,
+        "gols_contra": 30,
+        "pontos": 22
+    },
+    {
+        "nome": "Paris FC",
+        "gols_pro": 24,
+        "gols_contra": 32,
+        "pontos": 19
+    },
+    {
+        "nome": "Le Havre AC",
+        "gols_pro": 16,
+        "gols_contra": 24,
+        "pontos": 19
+    },
+    {
+        "nome": "OGC Nice",
+        "gols_pro": 21,
+        "gols_contra": 35,
+        "pontos": 18
+    },
+    {
+        "nome": "FC Nantes",
+        "gols_pro": 17,
+        "gols_contra": 30,
+        "pontos": 14
+    },
+    {
+        "nome": "AJ Auxerre",
+        "gols_pro": 14,
+        "gols_contra": 28,
+        "pontos": 12
+    },
+    {
+        "nome": "FC Metz",
+        "gols_pro": 19,
+        "gols_contra": 40,
+        "pontos": 12
+    }
+]

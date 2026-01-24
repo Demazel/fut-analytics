@@ -1,0 +1,110 @@
+[
+    {
+        "nome": "FC Bayern München",
+        "gols_pro": 71,
+        "gols_contra": 14,
+        "pontos": 50
+    },
+    {
+        "nome": "Borussia Dortmund",
+        "gols_pro": 35,
+        "gols_contra": 17,
+        "pontos": 39
+    },
+    {
+        "nome": "TSG 1899 Hoffenheim",
+        "gols_pro": 35,
+        "gols_contra": 21,
+        "pontos": 33
+    },
+    {
+        "nome": "VfB Stuttgart",
+        "gols_pro": 33,
+        "gols_contra": 26,
+        "pontos": 33
+    },
+    {
+        "nome": "RB Leipzig",
+        "gols_pro": 33,
+        "gols_contra": 24,
+        "pontos": 32
+    },
+    {
+        "nome": "Bayer 04 Leverkusen",
+        "gols_pro": 34,
+        "gols_contra": 25,
+        "pontos": 29
+    },
+    {
+        "nome": "Eintracht Frankfurt",
+        "gols_pro": 38,
+        "gols_contra": 39,
+        "pontos": 27
+    },
+    {
+        "nome": "SC Freiburg",
+        "gols_pro": 29,
+        "gols_contra": 31,
+        "pontos": 24
+    },
+    {
+        "nome": "1. FC Union Berlin",
+        "gols_pro": 24,
+        "gols_contra": 27,
+        "pontos": 24
+    },
+    {
+        "nome": "1. FC Köln",
+        "gols_pro": 27,
+        "gols_contra": 30,
+        "pontos": 20
+    },
+    {
+        "nome": "Borussia Mönchengladbach",
+        "gols_pro": 23,
+        "gols_contra": 29,
+        "pontos": 20
+    },
+    {
+        "nome": "VfL Wolfsburg",
+        "gols_pro": 27,
+        "gols_contra": 38,
+        "pontos": 19
+    },
+    {
+        "nome": "SV Werder Bremen",
+        "gols_pro": 21,
+        "gols_contra": 34,
+        "pontos": 18
+    },
+    {
+        "nome": "Hamburger SV",
+        "gols_pro": 17,
+        "gols_contra": 27,
+        "pontos": 17
+    },
+    {
+        "nome": "FC Augsburg",
+        "gols_pro": 20,
+        "gols_contra": 35,
+        "pontos": 16
+    },
+    {
+        "nome": "1. FC Heidenheim 1846",
+        "gols_pro": 17,
+        "gols_contra": 39,
+        "pontos": 13
+    },
+    {
+        "nome": "1. FSV Mainz 05",
+        "gols_pro": 18,
+        "gols_contra": 31,
+        "pontos": 12
+    },
+    {
+        "nome": "FC St. Pauli 1910",
+        "gols_pro": 16,
+        "gols_contra": 31,
+        "pontos": 12
+    }
+]

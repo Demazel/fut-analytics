@@ -1,0 +1,110 @@
+[
+    {
+        "nome": "FC Bayern München",
+        "gols_pro": 99,
+        "gols_contra": 32,
+        "pontos": 82
+    },
+    {
+        "nome": "Bayer 04 Leverkusen",
+        "gols_pro": 72,
+        "gols_contra": 43,
+        "pontos": 69
+    },
+    {
+        "nome": "Eintracht Frankfurt",
+        "gols_pro": 68,
+        "gols_contra": 46,
+        "pontos": 60
+    },
+    {
+        "nome": "Borussia Dortmund",
+        "gols_pro": 71,
+        "gols_contra": 51,
+        "pontos": 57
+    },
+    {
+        "nome": "SC Freiburg",
+        "gols_pro": 49,
+        "gols_contra": 53,
+        "pontos": 55
+    },
+    {
+        "nome": "1. FSV Mainz 05",
+        "gols_pro": 55,
+        "gols_contra": 43,
+        "pontos": 52
+    },
+    {
+        "nome": "RB Leipzig",
+        "gols_pro": 53,
+        "gols_contra": 48,
+        "pontos": 51
+    },
+    {
+        "nome": "SV Werder Bremen",
+        "gols_pro": 54,
+        "gols_contra": 57,
+        "pontos": 51
+    },
+    {
+        "nome": "VfB Stuttgart",
+        "gols_pro": 64,
+        "gols_contra": 53,
+        "pontos": 50
+    },
+    {
+        "nome": "Borussia Mönchengladbach",
+        "gols_pro": 55,
+        "gols_contra": 57,
+        "pontos": 45
+    },
+    {
+        "nome": "VfL Wolfsburg",
+        "gols_pro": 56,
+        "gols_contra": 54,
+        "pontos": 43
+    },
+    {
+        "nome": "FC Augsburg",
+        "gols_pro": 35,
+        "gols_contra": 51,
+        "pontos": 43
+    },
+    {
+        "nome": "1. FC Union Berlin",
+        "gols_pro": 35,
+        "gols_contra": 49,
+        "pontos": 40
+    },
+    {
+        "nome": "FC St. Pauli 1910",
+        "gols_pro": 28,
+        "gols_contra": 41,
+        "pontos": 32
+    },
+    {
+        "nome": "TSG 1899 Hoffenheim",
+        "gols_pro": 46,
+        "gols_contra": 68,
+        "pontos": 32
+    },
+    {
+        "nome": "1. FC Heidenheim 1846",
+        "gols_pro": 37,
+        "gols_contra": 64,
+        "pontos": 29
+    },
+    {
+        "nome": "Holstein Kiel",
+        "gols_pro": 49,
+        "gols_contra": 80,
+        "pontos": 25
+    },
+    {
+        "nome": "VfL Bochum 1848",
+        "gols_pro": 31,
+        "gols_contra": 67,
+        "pontos": 22
+    }
+]

@@ -1,0 +1,122 @@
+[
+    {
+        "nome": "FC Barcelona",
+        "gols_pro": 54,
+        "gols_contra": 22,
+        "pontos": 49
+    },
+    {
+        "nome": "Real Madrid CF",
+        "gols_pro": 43,
+        "gols_contra": 17,
+        "pontos": 48
+    },
+    {
+        "nome": "Villarreal CF",
+        "gols_pro": 37,
+        "gols_contra": 19,
+        "pontos": 41
+    },
+    {
+        "nome": "Club Atlético de Madrid",
+        "gols_pro": 35,
+        "gols_contra": 17,
+        "pontos": 41
+    },
+    {
+        "nome": "RCD Espanyol de Barcelona",
+        "gols_pro": 23,
+        "gols_contra": 22,
+        "pontos": 34
+    },
+    {
+        "nome": "Real Betis Balompié",
+        "gols_pro": 33,
+        "gols_contra": 25,
+        "pontos": 32
+    },
+    {
+        "nome": "RC Celta de Vigo",
+        "gols_pro": 28,
+        "gols_contra": 20,
+        "pontos": 32
+    },
+    {
+        "nome": "Elche CF",
+        "gols_pro": 27,
+        "gols_contra": 26,
+        "pontos": 24
+    },
+    {
+        "nome": "Real Sociedad de Fútbol",
+        "gols_pro": 26,
+        "gols_contra": 28,
+        "pontos": 24
+    },
+    {
+        "nome": "Athletic Club",
+        "gols_pro": 19,
+        "gols_contra": 28,
+        "pontos": 24
+    },
+    {
+        "nome": "Girona FC",
+        "gols_pro": 20,
+        "gols_contra": 34,
+        "pontos": 24
+    },
+    {
+        "nome": "CA Osasuna",
+        "gols_pro": 21,
+        "gols_contra": 24,
+        "pontos": 22
+    },
+    {
+        "nome": "Rayo Vallecano de Madrid",
+        "gols_pro": 16,
+        "gols_contra": 25,
+        "pontos": 22
+    },
+    {
+        "nome": "Sevilla FC",
+        "gols_pro": 26,
+        "gols_contra": 32,
+        "pontos": 21
+    },
+    {
+        "nome": "RCD Mallorca",
+        "gols_pro": 24,
+        "gols_contra": 30,
+        "pontos": 21
+    },
+    {
+        "nome": "Getafe CF",
+        "gols_pro": 15,
+        "gols_contra": 26,
+        "pontos": 21
+    },
+    {
+        "nome": "Valencia CF",
+        "gols_pro": 19,
+        "gols_contra": 31,
+        "pontos": 20
+    },
+    {
+        "nome": "Deportivo Alavés",
+        "gols_pro": 16,
+        "gols_contra": 25,
+        "pontos": 19
+    },
+    {
+        "nome": "Levante UD",
+        "gols_pro": 21,
+        "gols_contra": 32,
+        "pontos": 14
+    },
+    {
+        "nome": "Real Oviedo",
+        "gols_pro": 11,
+        "gols_contra": 31,
+        "pontos": 13
+    }
+]

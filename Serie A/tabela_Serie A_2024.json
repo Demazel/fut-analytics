@@ -1,0 +1,122 @@
+[
+    {
+        "nome": "SSC Napoli",
+        "gols_pro": 59,
+        "gols_contra": 27,
+        "pontos": 82
+    },
+    {
+        "nome": "FC Internazionale Milano",
+        "gols_pro": 79,
+        "gols_contra": 35,
+        "pontos": 81
+    },
+    {
+        "nome": "Atalanta BC",
+        "gols_pro": 78,
+        "gols_contra": 37,
+        "pontos": 74
+    },
+    {
+        "nome": "Juventus FC",
+        "gols_pro": 58,
+        "gols_contra": 35,
+        "pontos": 70
+    },
+    {
+        "nome": "AS Roma",
+        "gols_pro": 56,
+        "gols_contra": 35,
+        "pontos": 69
+    },
+    {
+        "nome": "ACF Fiorentina",
+        "gols_pro": 60,
+        "gols_contra": 41,
+        "pontos": 65
+    },
+    {
+        "nome": "SS Lazio",
+        "gols_pro": 61,
+        "gols_contra": 49,
+        "pontos": 65
+    },
+    {
+        "nome": "AC Milan",
+        "gols_pro": 61,
+        "gols_contra": 43,
+        "pontos": 63
+    },
+    {
+        "nome": "Bologna FC 1909",
+        "gols_pro": 57,
+        "gols_contra": 47,
+        "pontos": 62
+    },
+    {
+        "nome": "Como 1907",
+        "gols_pro": 49,
+        "gols_contra": 52,
+        "pontos": 49
+    },
+    {
+        "nome": "Torino FC",
+        "gols_pro": 39,
+        "gols_contra": 45,
+        "pontos": 44
+    },
+    {
+        "nome": "Udinese Calcio",
+        "gols_pro": 41,
+        "gols_contra": 56,
+        "pontos": 44
+    },
+    {
+        "nome": "Genoa CFC",
+        "gols_pro": 37,
+        "gols_contra": 49,
+        "pontos": 43
+    },
+    {
+        "nome": "Hellas Verona FC",
+        "gols_pro": 34,
+        "gols_contra": 66,
+        "pontos": 37
+    },
+    {
+        "nome": "Parma Calcio 1913",
+        "gols_pro": 44,
+        "gols_contra": 58,
+        "pontos": 36
+    },
+    {
+        "nome": "Cagliari Calcio",
+        "gols_pro": 40,
+        "gols_contra": 56,
+        "pontos": 36
+    },
+    {
+        "nome": "US Lecce",
+        "gols_pro": 27,
+        "gols_contra": 58,
+        "pontos": 34
+    },
+    {
+        "nome": "Empoli FC",
+        "gols_pro": 33,
+        "gols_contra": 59,
+        "pontos": 31
+    },
+    {
+        "nome": "Venezia FC",
+        "gols_pro": 32,
+        "gols_contra": 56,
+        "pontos": 29
+    },
+    {
+        "nome": "AC Monza",
+        "gols_pro": 28,
+        "gols_contra": 69,
+        "pontos": 18
+    }
+]

@@ -1,0 +1,110 @@
+[
+    {
+        "nome": "FC Porto",
+        "gols_pro": 37,
+        "gols_contra": 4,
+        "pontos": 52
+    },
+    {
+        "nome": "Sporting Clube de Portugal",
+        "gols_pro": 50,
+        "gols_contra": 9,
+        "pontos": 45
+    },
+    {
+        "nome": "Sport Lisboa e Benfica",
+        "gols_pro": 38,
+        "gols_contra": 11,
+        "pontos": 42
+    },
+    {
+        "nome": "Gil Vicente FC",
+        "gols_pro": 24,
+        "gols_contra": 13,
+        "pontos": 31
+    },
+    {
+        "nome": "Sporting Clube de Braga",
+        "gols_pro": 32,
+        "gols_contra": 18,
+        "pontos": 30
+    },
+    {
+        "nome": "Moreirense FC",
+        "gols_pro": 25,
+        "gols_contra": 26,
+        "pontos": 27
+    },
+    {
+        "nome": "FC Famalicão",
+        "gols_pro": 21,
+        "gols_contra": 14,
+        "pontos": 26
+    },
+    {
+        "nome": "Vitória SC",
+        "gols_pro": 18,
+        "gols_contra": 23,
+        "pontos": 25
+    },
+    {
+        "nome": "GD Estoril Praia",
+        "gols_pro": 33,
+        "gols_contra": 29,
+        "pontos": 23
+    },
+    {
+        "nome": "FC Alverca",
+        "gols_pro": 19,
+        "gols_contra": 28,
+        "pontos": 23
+    },
+    {
+        "nome": "Rio Ave FC",
+        "gols_pro": 22,
+        "gols_contra": 31,
+        "pontos": 20
+    },
+    {
+        "nome": "CF Estrela da Amadora",
+        "gols_pro": 23,
+        "gols_contra": 32,
+        "pontos": 19
+    },
+    {
+        "nome": "CD Nacional",
+        "gols_pro": 22,
+        "gols_contra": 28,
+        "pontos": 17
+    },
+    {
+        "nome": "CD Santa Clara",
+        "gols_pro": 14,
+        "gols_contra": 20,
+        "pontos": 17
+    },
+    {
+        "nome": "FC Arouca",
+        "gols_pro": 19,
+        "gols_contra": 42,
+        "pontos": 17
+    },
+    {
+        "nome": "Casa Pia AC",
+        "gols_pro": 17,
+        "gols_contra": 35,
+        "pontos": 14
+    },
+    {
+        "nome": "CD Tondela",
+        "gols_pro": 12,
+        "gols_contra": 30,
+        "pontos": 12
+    },
+    {
+        "nome": "AVS",
+        "gols_pro": 11,
+        "gols_contra": 44,
+        "pontos": 4
+    }
+]

@@ -1,0 +1,122 @@
+[
+    {
+        "nome": "Manchester City FC",
+        "gols_pro": 96,
+        "gols_contra": 34,
+        "pontos": 91
+    },
+    {
+        "nome": "Arsenal FC",
+        "gols_pro": 91,
+        "gols_contra": 29,
+        "pontos": 89
+    },
+    {
+        "nome": "Liverpool FC",
+        "gols_pro": 86,
+        "gols_contra": 41,
+        "pontos": 82
+    },
+    {
+        "nome": "Aston Villa FC",
+        "gols_pro": 76,
+        "gols_contra": 61,
+        "pontos": 68
+    },
+    {
+        "nome": "Tottenham Hotspur FC",
+        "gols_pro": 74,
+        "gols_contra": 61,
+        "pontos": 66
+    },
+    {
+        "nome": "Chelsea FC",
+        "gols_pro": 77,
+        "gols_contra": 63,
+        "pontos": 63
+    },
+    {
+        "nome": "Newcastle United FC",
+        "gols_pro": 85,
+        "gols_contra": 62,
+        "pontos": 60
+    },
+    {
+        "nome": "Manchester United FC",
+        "gols_pro": 57,
+        "gols_contra": 58,
+        "pontos": 60
+    },
+    {
+        "nome": "West Ham United FC",
+        "gols_pro": 60,
+        "gols_contra": 74,
+        "pontos": 52
+    },
+    {
+        "nome": "Crystal Palace FC",
+        "gols_pro": 57,
+        "gols_contra": 58,
+        "pontos": 49
+    },
+    {
+        "nome": "Brighton & Hove Albion FC",
+        "gols_pro": 55,
+        "gols_contra": 62,
+        "pontos": 48
+    },
+    {
+        "nome": "Everton FC",
+        "gols_pro": 40,
+        "gols_contra": 51,
+        "pontos": 48
+    },
+    {
+        "nome": "AFC Bournemouth",
+        "gols_pro": 54,
+        "gols_contra": 67,
+        "pontos": 48
+    },
+    {
+        "nome": "Fulham FC",
+        "gols_pro": 55,
+        "gols_contra": 61,
+        "pontos": 47
+    },
+    {
+        "nome": "Wolverhampton Wanderers FC",
+        "gols_pro": 50,
+        "gols_contra": 65,
+        "pontos": 46
+    },
+    {
+        "nome": "Brentford FC",
+        "gols_pro": 56,
+        "gols_contra": 65,
+        "pontos": 39
+    },
+    {
+        "nome": "Nottingham Forest FC",
+        "gols_pro": 49,
+        "gols_contra": 67,
+        "pontos": 36
+    },
+    {
+        "nome": "Luton Town FC",
+        "gols_pro": 52,
+        "gols_contra": 85,
+        "pontos": 26
+    },
+    {
+        "nome": "Burnley FC",
+        "gols_pro": 41,
+        "gols_contra": 78,
+        "pontos": 24
+    },
+    {
+        "nome": "Sheffield United FC",
+        "gols_pro": 35,
+        "gols_contra": 104,
+        "pontos": 16
+    }
+]

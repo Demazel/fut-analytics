@@ -1,0 +1,122 @@
+[
+    {
+        "nome": "Liverpool FC",
+        "gols_pro": 86,
+        "gols_contra": 41,
+        "pontos": 84
+    },
+    {
+        "nome": "Arsenal FC",
+        "gols_pro": 69,
+        "gols_contra": 34,
+        "pontos": 74
+    },
+    {
+        "nome": "Manchester City FC",
+        "gols_pro": 72,
+        "gols_contra": 44,
+        "pontos": 71
+    },
+    {
+        "nome": "Chelsea FC",
+        "gols_pro": 64,
+        "gols_contra": 43,
+        "pontos": 69
+    },
+    {
+        "nome": "Newcastle United FC",
+        "gols_pro": 68,
+        "gols_contra": 47,
+        "pontos": 66
+    },
+    {
+        "nome": "Aston Villa FC",
+        "gols_pro": 58,
+        "gols_contra": 51,
+        "pontos": 66
+    },
+    {
+        "nome": "Nottingham Forest FC",
+        "gols_pro": 58,
+        "gols_contra": 46,
+        "pontos": 65
+    },
+    {
+        "nome": "Brighton & Hove Albion FC",
+        "gols_pro": 66,
+        "gols_contra": 59,
+        "pontos": 61
+    },
+    {
+        "nome": "AFC Bournemouth",
+        "gols_pro": 58,
+        "gols_contra": 46,
+        "pontos": 56
+    },
+    {
+        "nome": "Brentford FC",
+        "gols_pro": 66,
+        "gols_contra": 57,
+        "pontos": 56
+    },
+    {
+        "nome": "Fulham FC",
+        "gols_pro": 54,
+        "gols_contra": 54,
+        "pontos": 54
+    },
+    {
+        "nome": "Crystal Palace FC",
+        "gols_pro": 51,
+        "gols_contra": 51,
+        "pontos": 53
+    },
+    {
+        "nome": "Everton FC",
+        "gols_pro": 42,
+        "gols_contra": 44,
+        "pontos": 48
+    },
+    {
+        "nome": "West Ham United FC",
+        "gols_pro": 46,
+        "gols_contra": 62,
+        "pontos": 43
+    },
+    {
+        "nome": "Manchester United FC",
+        "gols_pro": 44,
+        "gols_contra": 54,
+        "pontos": 42
+    },
+    {
+        "nome": "Wolverhampton Wanderers FC",
+        "gols_pro": 54,
+        "gols_contra": 69,
+        "pontos": 42
+    },
+    {
+        "nome": "Tottenham Hotspur FC",
+        "gols_pro": 64,
+        "gols_contra": 65,
+        "pontos": 38
+    },
+    {
+        "nome": "Leicester City FC",
+        "gols_pro": 33,
+        "gols_contra": 80,
+        "pontos": 25
+    },
+    {
+        "nome": "Ipswich Town FC",
+        "gols_pro": 36,
+        "gols_contra": 82,
+        "pontos": 22
+    },
+    {
+        "nome": "Southampton FC",
+        "gols_pro": 26,
+        "gols_contra": 86,
+        "pontos": 12
+    }
+]

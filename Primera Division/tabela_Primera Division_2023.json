@@ -1,0 +1,122 @@
+[
+    {
+        "nome": "Real Madrid CF",
+        "gols_pro": 87,
+        "gols_contra": 26,
+        "pontos": 95
+    },
+    {
+        "nome": "FC Barcelona",
+        "gols_pro": 79,
+        "gols_contra": 44,
+        "pontos": 85
+    },
+    {
+        "nome": "Girona FC",
+        "gols_pro": 85,
+        "gols_contra": 46,
+        "pontos": 81
+    },
+    {
+        "nome": "Club Atlético de Madrid",
+        "gols_pro": 70,
+        "gols_contra": 43,
+        "pontos": 76
+    },
+    {
+        "nome": "Athletic Club",
+        "gols_pro": 61,
+        "gols_contra": 37,
+        "pontos": 68
+    },
+    {
+        "nome": "Real Sociedad de Fútbol",
+        "gols_pro": 51,
+        "gols_contra": 39,
+        "pontos": 60
+    },
+    {
+        "nome": "Real Betis Balompié",
+        "gols_pro": 48,
+        "gols_contra": 45,
+        "pontos": 57
+    },
+    {
+        "nome": "Villarreal CF",
+        "gols_pro": 65,
+        "gols_contra": 65,
+        "pontos": 53
+    },
+    {
+        "nome": "Valencia CF",
+        "gols_pro": 40,
+        "gols_contra": 45,
+        "pontos": 49
+    },
+    {
+        "nome": "Deportivo Alavés",
+        "gols_pro": 36,
+        "gols_contra": 46,
+        "pontos": 46
+    },
+    {
+        "nome": "CA Osasuna",
+        "gols_pro": 45,
+        "gols_contra": 56,
+        "pontos": 45
+    },
+    {
+        "nome": "Getafe CF",
+        "gols_pro": 42,
+        "gols_contra": 54,
+        "pontos": 43
+    },
+    {
+        "nome": "Sevilla FC",
+        "gols_pro": 48,
+        "gols_contra": 54,
+        "pontos": 41
+    },
+    {
+        "nome": "RC Celta de Vigo",
+        "gols_pro": 46,
+        "gols_contra": 57,
+        "pontos": 41
+    },
+    {
+        "nome": "RCD Mallorca",
+        "gols_pro": 33,
+        "gols_contra": 44,
+        "pontos": 40
+    },
+    {
+        "nome": "UD Las Palmas",
+        "gols_pro": 33,
+        "gols_contra": 47,
+        "pontos": 40
+    },
+    {
+        "nome": "Rayo Vallecano de Madrid",
+        "gols_pro": 29,
+        "gols_contra": 48,
+        "pontos": 38
+    },
+    {
+        "nome": "Cádiz CF",
+        "gols_pro": 26,
+        "gols_contra": 55,
+        "pontos": 33
+    },
+    {
+        "nome": "UD Almería",
+        "gols_pro": 43,
+        "gols_contra": 75,
+        "pontos": 21
+    },
+    {
+        "nome": "Granada CF",
+        "gols_pro": 38,
+        "gols_contra": 79,
+        "pontos": 21
+    }
+]

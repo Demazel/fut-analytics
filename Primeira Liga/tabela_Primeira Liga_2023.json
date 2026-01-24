@@ -1,0 +1,110 @@
+[
+    {
+        "nome": "Sporting Clube de Portugal",
+        "gols_pro": 96,
+        "gols_contra": 29,
+        "pontos": 90
+    },
+    {
+        "nome": "Sport Lisboa e Benfica",
+        "gols_pro": 77,
+        "gols_contra": 28,
+        "pontos": 80
+    },
+    {
+        "nome": "FC Porto",
+        "gols_pro": 63,
+        "gols_contra": 27,
+        "pontos": 72
+    },
+    {
+        "nome": "Sporting Clube de Braga",
+        "gols_pro": 71,
+        "gols_contra": 50,
+        "pontos": 68
+    },
+    {
+        "nome": "Vitória SC",
+        "gols_pro": 52,
+        "gols_contra": 38,
+        "pontos": 63
+    },
+    {
+        "nome": "Moreirense FC",
+        "gols_pro": 36,
+        "gols_contra": 35,
+        "pontos": 55
+    },
+    {
+        "nome": "FC Arouca",
+        "gols_pro": 54,
+        "gols_contra": 50,
+        "pontos": 46
+    },
+    {
+        "nome": "FC Famalicão",
+        "gols_pro": 37,
+        "gols_contra": 41,
+        "pontos": 42
+    },
+    {
+        "nome": "Casa Pia AC",
+        "gols_pro": 38,
+        "gols_contra": 50,
+        "pontos": 38
+    },
+    {
+        "nome": "SC Farense",
+        "gols_pro": 46,
+        "gols_contra": 51,
+        "pontos": 37
+    },
+    {
+        "nome": "Rio Ave FC",
+        "gols_pro": 38,
+        "gols_contra": 43,
+        "pontos": 37
+    },
+    {
+        "nome": "Gil Vicente FC",
+        "gols_pro": 42,
+        "gols_contra": 52,
+        "pontos": 36
+    },
+    {
+        "nome": "GD Estoril Praia",
+        "gols_pro": 49,
+        "gols_contra": 58,
+        "pontos": 33
+    },
+    {
+        "nome": "CF Estrela da Amadora",
+        "gols_pro": 33,
+        "gols_contra": 53,
+        "pontos": 33
+    },
+    {
+        "nome": "Boavista FC",
+        "gols_pro": 39,
+        "gols_contra": 62,
+        "pontos": 32
+    },
+    {
+        "nome": "Portimonense SC",
+        "gols_pro": 39,
+        "gols_contra": 72,
+        "pontos": 32
+    },
+    {
+        "nome": "FC Vizela",
+        "gols_pro": 36,
+        "gols_contra": 66,
+        "pontos": 26
+    },
+    {
+        "nome": "GD Chaves",
+        "gols_pro": 31,
+        "gols_contra": 72,
+        "pontos": 23
+    }
+]

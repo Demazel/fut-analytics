@@ -1,0 +1,110 @@
+[
+    {
+        "nome": "PSV",
+        "gols_pro": 59,
+        "gols_contra": 23,
+        "pontos": 52
+    },
+    {
+        "nome": "Feyenoord Rotterdam",
+        "gols_pro": 47,
+        "gols_contra": 27,
+        "pontos": 36
+    },
+    {
+        "nome": "AFC Ajax",
+        "gols_pro": 37,
+        "gols_contra": 26,
+        "pontos": 34
+    },
+    {
+        "nome": "NEC",
+        "gols_pro": 47,
+        "gols_contra": 32,
+        "pontos": 32
+    },
+    {
+        "nome": "FC Groningen",
+        "gols_pro": 27,
+        "gols_contra": 22,
+        "pontos": 31
+    },
+    {
+        "nome": "FC Twente '65",
+        "gols_pro": 29,
+        "gols_contra": 22,
+        "pontos": 29
+    },
+    {
+        "nome": "AZ",
+        "gols_pro": 34,
+        "gols_contra": 32,
+        "pontos": 29
+    },
+    {
+        "nome": "Sparta Rotterdam",
+        "gols_pro": 24,
+        "gols_contra": 34,
+        "pontos": 29
+    },
+    {
+        "nome": "SC Heerenveen",
+        "gols_pro": 31,
+        "gols_contra": 30,
+        "pontos": 24
+    },
+    {
+        "nome": "FC Utrecht",
+        "gols_pro": 29,
+        "gols_contra": 25,
+        "pontos": 23
+    },
+    {
+        "nome": "PEC Zwolle",
+        "gols_pro": 25,
+        "gols_contra": 40,
+        "pontos": 23
+    },
+    {
+        "nome": "Fortuna Sittard",
+        "gols_pro": 28,
+        "gols_contra": 33,
+        "pontos": 22
+    },
+    {
+        "nome": "Go Ahead Eagles",
+        "gols_pro": 30,
+        "gols_contra": 33,
+        "pontos": 21
+    },
+    {
+        "nome": "SBV Excelsior",
+        "gols_pro": 20,
+        "gols_contra": 35,
+        "pontos": 21
+    },
+    {
+        "nome": "FC Volendam",
+        "gols_pro": 21,
+        "gols_contra": 33,
+        "pontos": 17
+    },
+    {
+        "nome": "Telstar 1963",
+        "gols_pro": 24,
+        "gols_contra": 32,
+        "pontos": 16
+    },
+    {
+        "nome": "NAC Breda",
+        "gols_pro": 19,
+        "gols_contra": 30,
+        "pontos": 14
+    },
+    {
+        "nome": "Heracles Almelo",
+        "gols_pro": 26,
+        "gols_contra": 48,
+        "pontos": 14
+    }
+]

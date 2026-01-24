@@ -1,0 +1,122 @@
+[
+    {
+        "nome": "Botafogo FR",
+        "gols_pro": 59,
+        "gols_contra": 29,
+        "pontos": 79
+    },
+    {
+        "nome": "SE Palmeiras",
+        "gols_pro": 60,
+        "gols_contra": 33,
+        "pontos": 73
+    },
+    {
+        "nome": "CR Flamengo",
+        "gols_pro": 61,
+        "gols_contra": 42,
+        "pontos": 70
+    },
+    {
+        "nome": "Fortaleza EC",
+        "gols_pro": 53,
+        "gols_contra": 39,
+        "pontos": 68
+    },
+    {
+        "nome": "SC Internacional",
+        "gols_pro": 53,
+        "gols_contra": 36,
+        "pontos": 65
+    },
+    {
+        "nome": "São Paulo FC",
+        "gols_pro": 53,
+        "gols_contra": 43,
+        "pontos": 59
+    },
+    {
+        "nome": "SC Corinthians Paulista",
+        "gols_pro": 54,
+        "gols_contra": 45,
+        "pontos": 56
+    },
+    {
+        "nome": "EC Bahia",
+        "gols_pro": 49,
+        "gols_contra": 49,
+        "pontos": 53
+    },
+    {
+        "nome": "Cruzeiro EC",
+        "gols_pro": 43,
+        "gols_contra": 41,
+        "pontos": 52
+    },
+    {
+        "nome": "CR Vasco da Gama",
+        "gols_pro": 43,
+        "gols_contra": 56,
+        "pontos": 50
+    },
+    {
+        "nome": "CA Mineiro",
+        "gols_pro": 47,
+        "gols_contra": 54,
+        "pontos": 47
+    },
+    {
+        "nome": "EC Vitória",
+        "gols_pro": 45,
+        "gols_contra": 52,
+        "pontos": 47
+    },
+    {
+        "nome": "Fluminense FC",
+        "gols_pro": 33,
+        "gols_contra": 39,
+        "pontos": 46
+    },
+    {
+        "nome": "Grêmio FBPA",
+        "gols_pro": 44,
+        "gols_contra": 50,
+        "pontos": 45
+    },
+    {
+        "nome": "EC Juventude",
+        "gols_pro": 48,
+        "gols_contra": 59,
+        "pontos": 45
+    },
+    {
+        "nome": "RB Bragantino",
+        "gols_pro": 44,
+        "gols_contra": 48,
+        "pontos": 44
+    },
+    {
+        "nome": "CA Paranaense",
+        "gols_pro": 40,
+        "gols_contra": 46,
+        "pontos": 42
+    },
+    {
+        "nome": "Criciúma EC",
+        "gols_pro": 42,
+        "gols_contra": 61,
+        "pontos": 38
+    },
+    {
+        "nome": "Cuiabá EC",
+        "gols_pro": 29,
+        "gols_contra": 49,
+        "pontos": 30
+    },
+    {
+        "nome": "AC Goianiense",
+        "gols_pro": 29,
+        "gols_contra": 58,
+        "pontos": 30
+    }
+]
