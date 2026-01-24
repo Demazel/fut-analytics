@@ -62,3 +62,32 @@ def melhor_defesa(df_tabela):
     except Exception as e:
         print(f"Erro ao obter dados: {e}")
         return None
+
+def obter_dados_artilheiros(codigo_liga, escolha_season):
+    try:
+        url = f"https://api.football-data.org/v4/competitions/{codigo_liga}/scorers"
+        headers = {
+            "X-Auth-Token": "93029a6429024c46abe457d02cdc19ff" 
+        }
+        params = {
+            "season": escolha_season
+        }
+        
+        response = requests.get(url, headers=headers, params=params)
+        dados = response.json()
+        
+        tabela_formatada = []
+        
+        if 'scorers' in dados:
+            for item in dados['scorers']:
+                dados_time = {
+                    "nome": item['player']['name'],
+                    "gols": item['goals'],
+                    "time": item['team']['name']
+                }
+                tabela_formatada.append(dados_time)
+                
+        return tabela_formatada 
+    except Exception as e:
+        print(f"Erro ao obter dados: {e}")
+        return None 
