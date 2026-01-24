@@ -1,8 +1,8 @@
 import pandas as pd
 from funcoes import *
 
-def data_frames(escolha_liga, escolha_season):
-    df_tabela = pd.read_json(f"{escolha_liga}/tabela_{escolha_liga}_{escolha_season}.json")
+def data_frames(dados):
+    df_tabela = pd.DataFrame(dados)
     return df_tabela   
     
 def data_frames_artilheiros(escolha_liga, escolha_season):
