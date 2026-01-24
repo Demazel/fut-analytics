@@ -36,6 +36,7 @@ def main():
             
             with st.spinner(f"Buscando dados para {escolha_liga} ({escolha_season})..."):
                 dados = obter_dados_ligas(codigo_liga, escolha_season)
+                dados_artilheiros = obter_dados_artilheiros(codigo_liga, escolha_season)
             
             if dados:
                 
@@ -50,19 +51,50 @@ def main():
                         'nome': 'Time',
                         'pontos': 'Pontos',
                         'jogos': 'J',
-                        'empates': 'E',
                         'gols_pro': 'GP',
                         'gols_contra': 'GC',
                         'saldo_gols': 'SG'
                     })
                     
-                    st.dataframe(
-                        df_tabela[['Posição', 'Escudo', 'Time', 'Pontos', 'J', 'E', 'GP', 'GC', 'SG']],
-                        column_config={
-                            "Escudo": st.column_config.ImageColumn("Escudo")
-                        },
-                        hide_index=True
-                    )
+                    # CSS to reduce font size for better fit
+                    st.markdown("""
+                        <style>
+                        div[data-testid="stDataFrame"] {
+                            font-size: 0.8rem !important;
+                        }
+                        </style>
+                    """, unsafe_allow_html=True)
+                    
+                    col_tab, col_art = st.columns([1.8, 1.2])
+                    
+                    with col_tab:
+                        st.subheader("Classificação")
+                        st.dataframe(
+                            df_tabela[['Posição', 'Escudo', 'Time', 'Pontos', 'GP', 'GC']],
+                            column_config={
+                                "Escudo": st.column_config.ImageColumn("Escudo"),
+                                "Time": st.column_config.TextColumn("Time", width="medium")
+                            },
+                            hide_index=True,
+                            use_container_width=True
+                        )
+                        
+                    with col_art:
+                        st.subheader("Artilharia")
+                        if dados_artilheiros:
+                            df_art = data_frames_artilheiros(dados_artilheiros)
+                            st.dataframe(
+                                df_art[['nome', 'gols', 'time']].head(20), # Show top 20
+                                column_config={
+                                    "nome": "Jogador",
+                                    "gols": "Gols",
+                                    "time": "Time"
+                                },
+                                hide_index=True,
+                                use_container_width=True
+                            )
+                        else:
+                            st.info("Artilharia não disponível.")
                     
                     ataque = melhor_ataque(df_tabela)
                     defesa = melhor_defesa(df_tabela)

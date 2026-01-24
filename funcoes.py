@@ -51,7 +51,6 @@ def obter_dados_ligas(codigo_liga, escolha_season):
                     "pontos": item['points'],
                     "jogos": item['playedGames'],
                     "vitorias": item['won'],
-                    "empates": item['draw'],
                     "derrotas": item['lost'],
                     "gols_pro": item['goalsFor'],
                     "gols_contra": item['goalsAgainst'],
