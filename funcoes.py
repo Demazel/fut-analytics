@@ -102,7 +102,8 @@ def obter_dados_artilheiros(codigo_liga, escolha_season):
                 dados_time = {
                     "nome": item['player']['name'],
                     "gols": item['goals'],
-                    "time": item['team']['name']
+                    "time": item['team']['name'],
+                    "escudo": item['team']['crest']
                 }
                 tabela_formatada.append(dados_time)
                 

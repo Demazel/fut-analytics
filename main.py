@@ -84,11 +84,12 @@ def main():
                         if dados_artilheiros:
                             df_art = data_frames_artilheiros(dados_artilheiros)
                             st.dataframe(
-                                df_art[['nome', 'gols', 'time']].head(20), # Show top 20
+                                df_art[['nome', 'gols', 'time', 'escudo']].head(20), # Show top 20
                                 column_config={
                                     "nome": "Jogador",
                                     "gols": "Gols",
-                                    "time": "Time"
+                                    "time": "Time",
+                                    "escudo": st.column_config.ImageColumn("Escudo")
                                 },
                                 hide_index=True,
                                 use_container_width=True
