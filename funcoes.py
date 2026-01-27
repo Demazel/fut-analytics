@@ -7,13 +7,10 @@ from data_frames import *
 def obter_codigo_liga(nome_liga):
     ligas = {
         "Campeonato Brasileiro Série A": "BSA",
-        "Championship": "ELC",
         "Premier League": "PL",
         "Ligue 1": "FL1",
         "Bundesliga": "BL1",
         "Serie A": "SA",
-        "Eredivisie": "DED",
-        "Primeira Liga": "PPL",
         "Primera Division": "PD",
     }
     return ligas.get(nome_liga)
