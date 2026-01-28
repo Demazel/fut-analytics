@@ -375,6 +375,9 @@ def main():
 
                              df_merged['Categoria ROI'] = df_merged.apply(get_quadrant, axis=1)
                              
+                             # Create Label column: Only show name for Smart Choice
+                             df_merged['Label'] = df_merged.apply(lambda x: x['Time'] if x['Time'] == team_rec else "", axis=1)
+                             
                              color_map_roi = {
                                  '⭐ Smart Choice': '#FFD700',      # Gold
                                  '💎 Oportunidade (Alta Entrega / Baixo Custo)': '#00CC96', # Greenish
@@ -403,7 +406,7 @@ def main():
                                      x='Valor_Patrocinio',
                                      y='GP',
                                      color='Categoria ROI',
-                                     text='Time',
+                                     text='Label',
                                      color_discrete_map=color_map_roi,
                                      title="Onde investir meu dinheiro?",
                                      labels={'Valor_Patrocinio': 'Custo (Valuation Score)', 'GP': 'Retorno (Gols)'}
