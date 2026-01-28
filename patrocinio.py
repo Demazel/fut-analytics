@@ -73,13 +73,111 @@ from funcoes import obter_dados_historicos, obter_dados_ligas
 # Dado que os dados da API são mais frequentes, vamos mapear PÚBLICO -> API.
 
 NAME_MAPPING = {
+    # Brasileirao
     "SC Corinthians": "SC Corinthians Paulista",
     "Atlético Mineiro": "CA Mineiro",
     "Athletico Paranaense": "CA Paranaense",
     "Atlético Goianiense": "AC Goianiense",
-    "São Paulo FC": "São Paulo FC", # Igual
-    "Botafogo FR": "Botafogo FR", # Igual
-    # Adicionar outros conforme necessidade
+    "São Paulo FC": "São Paulo FC",
+    "Botafogo FR": "Botafogo FR", 
+    "Vasco da Gama": "CR Vasco da Gama",
+    "Grêmio FBPA": "Grêmio FBPA",
+    "Santos FC": "Santos FC",
+    "EC Bahia": "EC Bahia",
+    "Cuiabá EC": "Cuiabá EC",
+
+    # Ligue 1
+    "FC Paris Saint-Germain": "Paris Saint-Germain FC",
+    "Olympique Marselha": "Olympique de Marseille",
+    "Olympique Lyon": "Olympique Lyonnais",
+    "RC Lens": "Racing Club de Lens",
+    "Stade Rennais FC": "Stade Rennais FC 1901",
+    "FC Nantes": "FC Nantes",
+    "AC Le Havre": "Le Havre AC", 
+    "AS Monaco": "AS Monaco FC",
+    "Stade Brestois 29": "Stade Brestois 29",
+    "Stade Reims": "Stade de Reims",
+    "RC Strasbourg Alsace": "RC Strasbourg Alsace",
+    "FC Lorient": "FC Lorient",
+    "FC Toulouse": "Toulouse FC",
+    "OGC Nice": "OGC Nice",
+    "Montpellier HSC": "Montpellier HSC",
+    
+    # Premier League
+    "Manchester City": "Manchester City FC",
+    "Arsenal FC": "Arsenal FC",
+    "Liverpool FC": "Liverpool FC",
+    "Aston Villa": "Aston Villa FC",
+    "Tottenham Hotspur": "Tottenham Hotspur FC",
+    "Chelsea FC": "Chelsea FC",
+    "Newcastle United": "Newcastle United FC",
+    "Manchester United": "Manchester United FC",
+    "West Ham United": "West Ham United FC",
+    "Brighton & Hove Albion": "Brighton & Hove Albion FC",
+    "Wolverhampton Wanderers": "Wolverhampton Wanderers FC",
+    "Fulham FC": "Fulham FC",
+    "Bournemouth": "AFC Bournemouth",
+    "Crystal Palace": "Crystal Palace FC",
+    "Brentford FC": "Brentford FC",
+    "Everton FC": "Everton FC",
+    "Nottingham Forest": "Nottingham Forest FC",
+    "Luton Town": "Luton Town FC", # Relegated but might appear
+    "Burnley FC": "Burnley FC", # Relegated but might appear
+    "Sheffield United": "Sheffield United FC", # Relegated but might appear
+    
+    # La Liga
+    "Real Madrid": "Real Madrid CF",
+    "FC Barcelona": "FC Barcelona",
+    "Girona FC": "Girona FC",
+    "Atlético de Madrid": "Club Atlético de Madrid",
+    "Athletic Bilbao": "Athletic Club",
+    "Real Sociedad": "Real Sociedad de Fútbol",
+    "Real Betis": "Real Betis Balompié",
+    "Villarreal CF": "Villarreal CF",
+    "Valencia CF": "Valencia CF",
+    "Sevilla FC": "Sevilla FC",
+    
+    # Serie A (Italia)
+    "Inter de Milão": "FC Internazionale Milano",
+    "Genoa": "Genoa CFC",
+    "Hellas Verona": "Hellas Verona FC",
+    "Salernitana Calcio 1919": "US Salernitana 1919",
+    "US Sassuolo": "US Sassuolo Calcio",
+    "FC Empoli": "Empoli FC",
+    "Bologna": "Bologna FC 1909",
+    "Atalanta BC": "Atalanta BC", # Igual? Sim
+    "ACF Fiorentina": "ACF Fiorentina", # Igual
+    "SS Lazio": "SS Lazio", # Igual
+    "SSC Napoli": "SSC Napoli", # Igual
+    "Juventus FC": "Juventus FC", # Igual
+    "AC Milan": "AC Milan", # Igual
+    "AS Roma": "AS Roma", # Igual
+    "Udinese Calcio": "Udinese Calcio", # Igual
+    "US Lecce": "US Lecce", # Igual
+    "Torino FC": "Torino FC", # Igual
+    "AC Monza": "AC Monza", # Igual
+    "Cagliari Calcio": "Cagliari Calcio", # Igual
+    "Frosinone Calcio": "Frosinone Calcio", # Igual
+
+    # Bundesliga
+    "FC Bayern Munique": "FC Bayern München",
+    "SG Eintracht Frankfurt": "Eintracht Frankfurt",
+    "1.FC Colônia": "1. FC Köln",
+    "Werder Bremen": "SV Werder Bremen",
+    "1.FSV Mainz 05": "1. FSV Mainz 05",
+    "1.FC Union Berlim": "1. FC Union Berlin",
+    "1.FC Heidenheim 1846": "1. FC Heidenheim 1846",
+    "VfL Bochum": "VfL Bochum 1848",
+    "Bayer 04 Leverkusen": "Bayer 04 Leverkusen", # Igual
+    "VfB Stuttgart": "VfB Stuttgart", # Igual
+    "RB Leipzig": "RB Leipzig", # Igual
+    "Borussia Dortmund": "Borussia Dortmund", # Igual
+    "Borussia Mönchengladbach": "Borussia Mönchengladbach", # Igual
+    "SC Freiburg": "SC Freiburg", # Igual
+    "FC Augsburg": "FC Augsburg", # Igual
+    "VfL Wolfsburg": "VfL Wolfsburg", # Igual
+    "TSG 1899 Hoffenheim": "TSG 1899 Hoffenheim", # Igual
+    "SV Darmstadt 98": "SV Darmstadt 98", # Igual
 }
 
 def normalizar_nome(nome):
