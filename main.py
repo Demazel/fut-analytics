@@ -182,7 +182,8 @@ def main():
 
                     # --- Valuation de Patrocínio ---
                     st.divider()
-                    st.subheader("💰 Valuation de Patrocínio (Modelo 3 Pilares)")
+                    st.subheader("💰 Valuation de Patrocínio")
+                    st.markdown("##### Top 3 patrocínios mais caros")
                 
                     with st.spinner("Calculando valor de patrocínio..."):
                          dados_patrocinio = calcular_valor_patrocinio(codigo_liga, escolha_season)
