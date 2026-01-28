@@ -180,182 +180,6 @@ def main():
                     
                     st.plotly_chart(fig_ha, key=f"ha_{escolha_liga}_{escolha_season}")
 
-                    st.divider()
-                    st.subheader("🤖 Scouting Intelligence - Gol de Placa")
-
-                    tab_curto, tab_longo = st.tabs(["Curto Prazo (Temporada Atual)", "Longo Prazo (Consistência)"])
-
-                    with tab_curto:
-                        # Calculate Efficiency (Goals per Game)
-                        df_tabela['Eficiência (Gols/Jogo)'] = (df_tabela['GP'] / df_tabela['J']).round(2)
-
-                        # Investment Logic: Find "Undervalued" Teams
-                        # Criteria: Teams ranked 5th or lower but with high Goal Count
-                        df_targets = df_tabela[df_tabela['Posição'] > 4]
-                        
-                        if not df_targets.empty:
-                            # Find the max Goals For in this subset
-                            max_gp_target = df_targets['GP'].max()
-                            # Get the team(s) with this max GP
-                            recommendations = df_targets[df_targets['GP'] == max_gp_target]
-                            
-                            team_rec = recommendations.iloc[0]['Time']
-                            pos_rec = recommendations.iloc[0]['Posição']
-                            gp_rec = recommendations.iloc[0]['GP']
-                            
-                            st.success(f"🌟 **Recomendação de Investimento: {team_rec}**")
-                            st.markdown(f"""
-                            **Análise do Algoritmo:**
-                            - O **{team_rec}** ocupa a **{pos_rec}ª posição**, o que reduz o custo do patrocínio comparado aos líderes.
-                            - Porém, o time marcou **{gp_rec} gols**, garantindo alta visibilidade na TV.
-                            - **Veredito:** Melhor custo-benefício para curto prazo.
-                            """)
-                        else:
-                            st.info("Todos os times com ataques fortes já estão no Top 4. Considere investir nos líderes para cobertura máxima.")
-
-                        col_scout1, col_scout2 = st.columns(2)
-                        
-                        with col_scout1:
-                            st.write("📊 Eficiência Ofensiva (Gols / Jogo)")
-                            st.dataframe(
-                                df_tabela[['Posição', 'Time', 'GP', 'J', 'Eficiência (Gols/Jogo)']].sort_values(by='Eficiência (Gols/Jogo)', ascending=False),
-                                hide_index=True
-                            )
-                            
-                        with col_scout2:
-                            st.write("📈 Mapa de Oportunidade")
-                            # Scatter focusing on Position vs Goals (Marketing View)
-                            
-                            # Define helper to determine category based on 'team_rec' (calculated above)
-                            # We assume 'team_rec' might exist if df_targets was not empty.
-                            # Initialize safe fallback if no rec found
-                            target_team_name = team_rec if 'team_rec' in locals() else None
-
-                            def get_scout_category(row):
-                                if target_team_name and row['Time'] == target_team_name:
-                                    return 'Recomendação' # Gold
-                                elif row['Posição'] <= 4:
-                                    return 'Elite (Top 4)' # LightGreen
-                                else:
-                                    return 'Outros' # LightBlue
-
-                            df_tabela['scout_color'] = df_tabela.apply(get_scout_category, axis=1)
-                            
-                            # Label logic: Show name ONLY for Recommendation
-                            def get_scout_label(row):
-                                if target_team_name and row['Time'] == target_team_name:
-                                    return row['Time']
-                                else:
-                                    return ''
-                            
-                            df_tabela['scout_label'] = df_tabela.apply(get_scout_label, axis=1)
-                            
-                            color_map_scout = {
-                                'Recomendação': '#FFD700', # Gold
-                                'Elite (Top 4)': 'lightgreen', 
-                                'Outros': 'lightblue'
-                            }
-
-                            fig_opp = px.scatter(
-                                df_tabela,
-                                x='Posição',
-                                y='GP',
-                                text='scout_label', 
-                                hover_data=['Time', 'Eficiência (Gols/Jogo)'],
-                                color='scout_color',
-                                color_discrete_map=color_map_scout,
-                                title="Posição x Gols (Busca por Oportunidades)",
-                                labels={'Posição': 'Posição na Tabela (Direita = Menor Custo)', 'GP': 'Gols Marcados (TV Time)', 'scout_color': 'Legenda'}
-                            )
-                            # Add vertical line separating Top 4
-                            fig_opp.add_vline(x=4.5, line_width=1, line_dash="dash", line_color="grey")
-                            fig_opp.add_annotation(x=15, y=df_tabela['GP'].max(), text="Zona de Oportunidade (Investimento)", showarrow=False, font=dict(color="green"))
-                            
-                            fig_opp.update_traces(textposition='top center', marker=dict(size=10))
-                            st.plotly_chart(fig_opp, key=f"opp_{escolha_liga}_{escolha_season}")
-
-                    with tab_longo:
-                        st.markdown("### Análise de Consistência Histórica")
-                        with st.spinner("Analisando histórico de temporadas..."):
-                            historico = obter_dados_historicos(codigo_liga, escolha_season)
-                        
-                        if len(historico) >= 2:
-                            # 1. Identify teams present in ALL fetched seasons
-                            # Get sets of team names for each year
-                            teams_per_year = []
-                            for ano, dados_ano in historico.items():
-                                df_ano = pd.DataFrame(dados_ano)
-                                teams_per_year.append(set(df_ano['nome']))
-                            
-                            # Intersection of all sets
-                            common_teams = set.intersection(*teams_per_year)
-                            
-                            if common_teams:
-                                # 2. Aggregate Goals for these teams
-                                team_stats = []
-                                for team in common_teams:
-                                    total_goals = 0
-                                    yearly_data = {}
-                                    
-                                    for ano, dados_ano in historico.items():
-                                        df_ano = pd.DataFrame(dados_ano)
-                                        row = df_ano[df_ano['nome'] == team].iloc[0]
-                                        goals = row['gols_pro'] # funcoes.py uses 'gols_pro', not 'GP' in raw data
-                                        total_goals += goals
-                                        yearly_data[ano] = goals
-                                    
-                                    stats = {'Time': team, 'Total Gols': total_goals}
-                                    stats.update(yearly_data)
-                                    team_stats.append(stats)
-                                
-                                df_historic = pd.DataFrame(team_stats)
-                                df_historic = df_historic.sort_values(by='Total Gols', ascending=False)
-                                
-                                # 3. Top 5 Best Attacks
-                                top_5_historic = df_historic.head(5)
-                                
-                                # Long Term Recommendation
-                                best_long_term = top_5_historic.iloc[0]
-                                team_lt = best_long_term['Time']
-                                total_lt = best_long_term['Total Gols']
-                                num_seasons = len(historico)
-                                
-                                st.success(f"💎 **Investimento Seguro (Longo Prazo): {team_lt}**")
-                                st.markdown(f"""
-                                **Análise de Consistência:**
-                                - **Domínio Histórico**: O **{team_lt}** é o time mais ofensivo acumulado no período analisado (**{total_lt/num_seasons:.1f} média de gols por temporada**).
-                                - **Estabilidade**: Presença garantida na elite e entrega constante de "tempo de tela" (gols).
-                                - **Veredito:** A "Blue Chip" do campeonato. Ideal para contratos longos (2+ anos).
-                                """)
-                                
-                                # Reshape for chart
-                                # We need columns: [Time, Ano, Gols]
-                                # The current df_historic has: [Time, Total, 2025, 2024, 2023]
-                                # Melt it
-                                years_cols = [col for col in df_historic.columns if col not in ['Time', 'Total Gols']]
-                                df_melted = top_5_historic.melt(id_vars=['Time'], value_vars=years_cols, var_name='Temporada', value_name='Gols')
-                                df_melted = df_melted.sort_values(by='Temporada')
-
-                                fig_hist = px.bar(
-                                    df_melted,
-                                    x='Time',
-                                    y='Gols',
-                                    color='Temporada',
-                                    barmode='group',
-                                    title="Evolução dos Top 5 Ataques (Times Consistentes)",
-                                    text='Gols'
-                                )
-                                fig_hist.update_traces(textposition='outside')
-                                st.plotly_chart(fig_hist, key=f"hist_{escolha_liga}")
-                                
-                            else:
-                                st.warning("Não há times que jogaram todas as temporadas selecionadas (possível alta rotatividade na liga).")
-                        else:
-                            st.warning("Dados históricos insuficientes para análise de longo prazo.")
-                                
-                except Exception as e:
-                    st.error(f"Erro ao exibir dados para {escolha_liga} ({escolha_season}): {e}")
-
                 # --- Valuation de Patrocínio ---
                 st.divider()
                 st.subheader("💰 Valuation de Patrocínio (Modelo 3 Pilares)")
@@ -426,6 +250,182 @@ def main():
                     
                 else:
                     st.warning("Não foi possível calcular o valuation de patrocínio (falta de dados de público ou histórico).")
+
+                st.divider()
+                st.subheader("🤖 Scouting Intelligence - Gol de Placa")
+
+                tab_curto, tab_longo = st.tabs(["Curto Prazo (Temporada Atual)", "Longo Prazo (Consistência)"])
+
+                with tab_curto:
+                    # Calculate Efficiency (Goals per Game)
+                    df_tabela['Eficiência (Gols/Jogo)'] = (df_tabela['GP'] / df_tabela['J']).round(2)
+
+                    # Investment Logic: Find "Undervalued" Teams
+                    # Criteria: Teams ranked 5th or lower but with high Goal Count
+                    df_targets = df_tabela[df_tabela['Posição'] > 4]
+                        
+                    if not df_targets.empty:
+                        # Find the max Goals For in this subset
+                        max_gp_target = df_targets['GP'].max()
+                        # Get the team(s) with this max GP
+                        recommendations = df_targets[df_targets['GP'] == max_gp_target]
+                            
+                        team_rec = recommendations.iloc[0]['Time']
+                        pos_rec = recommendations.iloc[0]['Posição']
+                        gp_rec = recommendations.iloc[0]['GP']
+                            
+                        st.success(f"🌟 **Recomendação de Investimento: {team_rec}**")
+                        st.markdown(f"""
+                        **Análise do Algoritmo:**
+                        - O **{team_rec}** ocupa a **{pos_rec}ª posição**, o que reduz o custo do patrocínio comparado aos líderes.
+                        - Porém, o time marcou **{gp_rec} gols**, garantindo alta visibilidade na TV.
+                        - **Veredito:** Melhor custo-benefício para curto prazo.
+                        """)
+                    else:
+                        st.info("Todos os times com ataques fortes já estão no Top 4. Considere investir nos líderes para cobertura máxima.")
+
+                    col_scout1, col_scout2 = st.columns(2)
+                        
+                    with col_scout1:
+                        st.write("📊 Eficiência Ofensiva (Gols / Jogo)")
+                        st.dataframe(
+                            df_tabela[['Posição', 'Time', 'GP', 'J', 'Eficiência (Gols/Jogo)']].sort_values(by='Eficiência (Gols/Jogo)', ascending=False),
+                            hide_index=True
+                        )
+                            
+                    with col_scout2:
+                        st.write("📈 Mapa de Oportunidade")
+                        # Scatter focusing on Position vs Goals (Marketing View)
+                            
+                        # Define helper to determine category based on 'team_rec' (calculated above)
+                        # We assume 'team_rec' might exist if df_targets was not empty.
+                        # Initialize safe fallback if no rec found
+                        target_team_name = team_rec if 'team_rec' in locals() else None
+
+                        def get_scout_category(row):
+                            if target_team_name and row['Time'] == target_team_name:
+                                return 'Recomendação' # Gold
+                            elif row['Posição'] <= 4:
+                                return 'Elite (Top 4)' # LightGreen
+                            else:
+                                return 'Outros' # LightBlue
+
+                        df_tabela['scout_color'] = df_tabela.apply(get_scout_category, axis=1)
+                            
+                        # Label logic: Show name ONLY for Recommendation
+                        def get_scout_label(row):
+                            if target_team_name and row['Time'] == target_team_name:
+                                return row['Time']
+                            else:
+                                return ''
+                            
+                        df_tabela['scout_label'] = df_tabela.apply(get_scout_label, axis=1)
+                            
+                        color_map_scout = {
+                            'Recomendação': '#FFD700', # Gold
+                            'Elite (Top 4)': 'lightgreen', 
+                            'Outros': 'lightblue'
+                        }
+
+                        fig_opp = px.scatter(
+                            df_tabela,
+                            x='Posição',
+                            y='GP',
+                            text='scout_label', 
+                            hover_data=['Time', 'Eficiência (Gols/Jogo)'],
+                            color='scout_color',
+                            color_discrete_map=color_map_scout,
+                            title="Posição x Gols (Busca por Oportunidades)",
+                            labels={'Posição': 'Posição na Tabela (Direita = Menor Custo)', 'GP': 'Gols Marcados (TV Time)', 'scout_color': 'Legenda'}
+                        )
+                        # Add vertical line separating Top 4
+                        fig_opp.add_vline(x=4.5, line_width=1, line_dash="dash", line_color="grey")
+                        fig_opp.add_annotation(x=15, y=df_tabela['GP'].max(), text="Zona de Oportunidade (Investimento)", showarrow=False, font=dict(color="green"))
+                            
+                        fig_opp.update_traces(textposition='top center', marker=dict(size=10))
+                        st.plotly_chart(fig_opp, key=f"opp_{escolha_liga}_{escolha_season}")
+
+                with tab_longo:
+                    st.markdown("### Análise de Consistência Histórica")
+                    with st.spinner("Analisando histórico de temporadas..."):
+                        historico = obter_dados_historicos(codigo_liga, escolha_season)
+                        
+                    if len(historico) >= 2:
+                        # 1. Identify teams present in ALL fetched seasons
+                        # Get sets of team names for each year
+                        teams_per_year = []
+                        for ano, dados_ano in historico.items():
+                            df_ano = pd.DataFrame(dados_ano)
+                            teams_per_year.append(set(df_ano['nome']))
+                            
+                        # Intersection of all sets
+                        common_teams = set.intersection(*teams_per_year)
+                            
+                        if common_teams:
+                            # 2. Aggregate Goals for these teams
+                            team_stats = []
+                            for team in common_teams:
+                                total_goals = 0
+                                yearly_data = {}
+                                    
+                                for ano, dados_ano in historico.items():
+                                    df_ano = pd.DataFrame(dados_ano)
+                                    row = df_ano[df_ano['nome'] == team].iloc[0]
+                                    goals = row['gols_pro'] # funcoes.py uses 'gols_pro', not 'GP' in raw data
+                                    total_goals += goals
+                                    yearly_data[ano] = goals
+                                    
+                                stats = {'Time': team, 'Total Gols': total_goals}
+                                stats.update(yearly_data)
+                                team_stats.append(stats)
+                                
+                            df_historic = pd.DataFrame(team_stats)
+                            df_historic = df_historic.sort_values(by='Total Gols', ascending=False)
+                                
+                            # 3. Top 5 Best Attacks
+                            top_5_historic = df_historic.head(5)
+                                
+                            # Long Term Recommendation
+                            best_long_term = top_5_historic.iloc[0]
+                            team_lt = best_long_term['Time']
+                            total_lt = best_long_term['Total Gols']
+                            num_seasons = len(historico)
+                                
+                            st.success(f"💎 **Investimento Seguro (Longo Prazo): {team_lt}**")
+                            st.markdown(f"""
+                            **Análise de Consistência:**
+                            - **Domínio Histórico**: O **{team_lt}** é o time mais ofensivo acumulado no período analisado (**{total_lt/num_seasons:.1f} média de gols por temporada**).
+                            - **Estabilidade**: Presença garantida na elite e entrega constante de "tempo de tela" (gols).
+                            - **Veredito:** A "Blue Chip" do campeonato. Ideal para contratos longos (2+ anos).
+                            """)
+                                
+                            # Reshape for chart
+                            # We need columns: [Time, Ano, Gols]
+                            # The current df_historic has: [Time, Total, 2025, 2024, 2023]
+                            # Melt it
+                            years_cols = [col for col in df_historic.columns if col not in ['Time', 'Total Gols']]
+                            df_melted = top_5_historic.melt(id_vars=['Time'], value_vars=years_cols, var_name='Temporada', value_name='Gols')
+                            df_melted = df_melted.sort_values(by='Temporada')
+
+                            fig_hist = px.bar(
+                                df_melted,
+                                x='Time',
+                                y='Gols',
+                                color='Temporada',
+                                barmode='group',
+                                title="Evolução dos Top 5 Ataques (Times Consistentes)",
+                                text='Gols'
+                            )
+                            fig_hist.update_traces(textposition='outside')
+                            st.plotly_chart(fig_hist, key=f"hist_{escolha_liga}")
+                                
+                        else:
+                            st.warning("Não há times que jogaram todas as temporadas selecionadas (possível alta rotatividade na liga).")
+                    else:
+                        st.warning("Dados históricos insuficientes para análise de longo prazo.")
+                                
+                except Exception as e:
+                st.error(f"Erro ao exibir dados para {escolha_liga} ({escolha_season}): {e}")
 
             else:
                 st.warning(f"Não foi possível obter dados para {escolha_liga} ({escolha_season}).")
