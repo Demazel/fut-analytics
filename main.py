@@ -36,8 +36,11 @@ def main():
             st.subheader(f"{escolha_liga} - Temporada {escolha_season}")
             
             with st.spinner(f"Buscando dados para {escolha_liga} ({escolha_season})..."):
-                dados = obter_dados_ligas(codigo_liga, escolha_season)
+                dados, fonte = obter_dados_ligas(codigo_liga, escolha_season)
                 dados_artilheiros = obter_dados_artilheiros(codigo_liga, escolha_season)
+            
+            if fonte == "Arquivo Local":
+                st.warning("⚠️ Erro ao carregar API. Exibindo dados salvos localmente (Backup).")
             
             if dados:
                 

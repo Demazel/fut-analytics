@@ -80,7 +80,7 @@ def obter_dados_ligas(codigo_liga, escolha_season):
                                 item['gols_casa'] = 0
                             if 'gols_fora' not in item:
                                 item['gols_fora'] = 0
-                        return conteudo
+                        return conteudo, "Arquivo Local"
                     else:
                         dados = conteudo
         except Exception as e:
@@ -118,10 +118,10 @@ def obter_dados_ligas(codigo_liga, escolha_season):
                 }
                 tabela_formatada.append(dados_time)
                 
-        return tabela_formatada 
+        return tabela_formatada, "API"
     except Exception as e:
         print(f"Erro ao processar dados: {e}")
-        return None 
+        return None, None
 
 def melhor_ataque(df_tabela):
     try:
@@ -181,7 +181,7 @@ def obter_dados_historicos(codigo_liga, temporada_atual):
         anos = range(ano_atual, ano_atual - 3, -1) 
         
         for ano in anos:
-            dados_ano = obter_dados_ligas(codigo_liga, str(ano))
+            dados_ano, _ = obter_dados_ligas(codigo_liga, str(ano))
             if dados_ano:
                 historico[str(ano)] = dados_ano
             
