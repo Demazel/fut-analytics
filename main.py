@@ -272,20 +272,45 @@ def main():
                              # Normalizing for chart sizing or coloring if needed
                              
                              # 3. Find Best Opportunity
-                             # Use ROI Score
-                             df_best_roi = df_merged.sort_values(by='ROI_Score', ascending=False).iloc[0]
+                             # User Request: "Time com mais gols que tem alta entrega com baixo custo"
                              
-                             team_rec = df_best_roi['Time']
-                             gp_rec = df_best_roi['GP']
-                             val_rec = df_best_roi['Valor_Patrocinio']
-                             pos_rec = df_best_roi['Posição']
+                             median_val = df_merged['Valor_Patrocinio'].median()
+                             median_gp = df_merged['GP'].median()
+                             
+                             # Filter: High Delivery (GP >= Median) AND Low Cost (Val <= Median)
+                             opportunities = df_merged[
+                                 (df_merged['GP'] >= median_gp) & 
+                                 (df_merged['Valor_Patrocinio'] <= median_val)
+                             ]
+                             
+                             if not opportunities.empty:
+                                 # Priority: Max Goals
+                                 # Tie-breaker: Low Cost (Ascending), then High ROI (Descending) just in case
+                                 best_choice = opportunities.sort_values(by=['GP', 'Valor_Patrocinio'], ascending=[False, True]).iloc[0]
+                                 label_veredicto = "Este time está no quadrante de 'Oportunidade': Entrega acima da média por um custo abaixo da média."
+                             else:
+                                 # Fallback: If no team is in the "Gold Mine" quadrant
+                                 # Pick the best ROI among the Top 50% of Goal Scorers (guarantees visibility)
+                                 top_scorers = df_merged[df_merged['GP'] >= median_gp]
+                                 if not top_scorers.empty:
+                                      best_choice = top_scorers.sort_values(by='ROI_Score', ascending=False).iloc[0]
+                                      label_veredicto = "Não há times de baixo custo com alta entrega. Esta é a opção mais eficiente entre os líderes de gols."
+                                 else:
+                                      # Fallback total
+                                      best_choice = df_merged.sort_values(by='ROI_Score', ascending=False).iloc[0]
+                                      label_veredicto = "Melhor retorno por ponto investido."
+                             
+                             team_rec = best_choice['Time']
+                             gp_rec = best_choice['GP']
+                             val_rec = best_choice['Valor_Patrocinio']
+                             pos_rec = best_choice['Posição']
                              
                              st.success(f"🚀 **Oportunidade Inteligente: {team_rec}**")
                              st.markdown(f"""
-                             **Análise de ROI (Retorno sobre Investimento):**
-                             - **Alta Visibilidade:** O time marcou **{gp_rec} gols** (exposição de marca).
-                             - **Custo Racional:** Seu score de valuation é **{val_rec:.1f}** (menor que os líderes de mercado).
-                             - **Veredito:** O **{team_rec}** entrega a maior quantidade de gols por cada ponto de investimento. É a escolha mais eficiente.
+                             **Análise Estratégica:**
+                             - **Alta Visibilidade:** {gp_rec} gols marcados.
+                             - **Baixo Custo:** Score de valuation {val_rec:.1f} (Abaixo da média de mercado).
+                             - **Veredito:** {label_veredicto}
                              """)
 
                              # 4. Scatter Plot: Valuation vs Goals
