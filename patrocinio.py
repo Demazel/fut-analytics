@@ -285,7 +285,7 @@ def calcular_pontuacao_atual(codigo_liga, temporada_atual):
     Calcula a pontuação baseada na posição atual.
     1º lugar = 20 pontos, ...
     """
-    dados_atuais = obter_dados_ligas(codigo_liga, temporada_atual)
+    dados_atuais, _ = obter_dados_ligas(codigo_liga, temporada_atual)
     if not dados_atuais:
         return []
         
