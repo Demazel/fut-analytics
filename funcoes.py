@@ -67,6 +67,14 @@ def obter_dados_ligas(codigo_liga, escolha_season):
                                 item['posicao'] = i + 1
                             if 'escudo' not in item:
                                 item['escudo'] = '' # Prevent KeyError
+                            if 'saldo_gols' not in item and 'gols_pro' in item and 'gols_contra' in item:
+                                item['saldo_gols'] = item['gols_pro'] - item['gols_contra']
+                            if 'jogos' not in item:
+                                item['jogos'] = 0
+                            if 'vitorias' not in item:
+                                item['vitorias'] = 0
+                            if 'derrotas' not in item:
+                                item['derrotas'] = 0
                         return conteudo
                     else:
                         dados = conteudo
