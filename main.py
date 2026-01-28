@@ -257,93 +257,99 @@ def main():
                     tab_curto, tab_longo = st.tabs(["Curto Prazo (Temporada Atual)", "Longo Prazo (Consistência)"])
 
                     with tab_curto:
-                        # Calculate Efficiency (Goals per Game)
-                        df_tabela['Eficiência (Gols/Jogo)'] = (df_tabela['GP'] / df_tabela['J']).round(2)
+                        # 1. Merge Valuation Data (Cost Proxy) with Table Data (Performance)
+                        # We need 'Valor_Patrocinio' from df_patrocinio
+                        if dados_patrocinio:
+                             df_val = pd.DataFrame(dados_patrocinio)
+                             # Merge on 'Time'
+                             # Note: df_tabela has 'Time', df_val has 'Time'. 
+                             df_merged = pd.merge(df_tabela, df_val[['Time', 'Valor_Patrocinio']], on='Time', how='inner')
+                             
+                             # 2. ROI Calculation: GP / Valor_Patrocinio
+                             # Higher is better: More goals per unit of sponsorship cost
+                             df_merged['ROI_Score'] = (df_merged['GP'] / df_merged['Valor_Patrocinio'])
+                             
+                             # Normalizing for chart sizing or coloring if needed
+                             
+                             # 3. Find Best Opportunity
+                             # Use ROI Score
+                             df_best_roi = df_merged.sort_values(by='ROI_Score', ascending=False).iloc[0]
+                             
+                             team_rec = df_best_roi['Time']
+                             gp_rec = df_best_roi['GP']
+                             val_rec = df_best_roi['Valor_Patrocinio']
+                             pos_rec = df_best_roi['Posição']
+                             
+                             st.success(f"🚀 **Oportunidade Inteligente: {team_rec}**")
+                             st.markdown(f"""
+                             **Análise de ROI (Retorno sobre Investimento):**
+                             - **Alta Visibilidade:** O time marcou **{gp_rec} gols** (exposição de marca).
+                             - **Custo Racional:** Seu score de valuation é **{val_rec:.1f}** (menor que os líderes de mercado).
+                             - **Veredito:** O **{team_rec}** entrega a maior quantidade de gols por cada ponto de investimento. É a escolha mais eficiente.
+                             """)
 
-                        # Investment Logic: Find "Undervalued" Teams
-                        # Criteria: Teams ranked 5th or lower but with high Goal Count
-                        df_targets = df_tabela[df_tabela['Posição'] > 4]
+                             # 4. Scatter Plot: Valuation vs Goals
+                             
+                             # Define Quadrants
+                             median_val = df_merged['Valor_Patrocinio'].median()
+                             median_gp = df_merged['GP'].median()
+                             
+                             def get_quadrant(row):
+                                 if row['Time'] == team_rec:
+                                     return '⭐ Smart Choice'
+                                 elif row['GP'] >= median_gp and row['Valor_Patrocinio'] <= median_val:
+                                     return '💎 Oportunidade (Alta Entrega / Baixo Custo)'
+                                 elif row['GP'] >= median_gp and row['Valor_Patrocinio'] > median_val:
+                                     return '🏆 Premium (Líderes / Caro)'
+                                 elif row['GP'] < median_gp and row['Valor_Patrocinio'] > median_val:
+                                     return '⚠️ Baixo Retorno / Custo Alto'
+                                 else:
+                                     return '📉 Baixa Visibilidade'
+
+                             df_merged['Categoria ROI'] = df_merged.apply(get_quadrant, axis=1)
+                             
+                             color_map_roi = {
+                                 '⭐ Smart Choice': '#FFD700',      # Gold
+                                 '💎 Oportunidade (Alta Entrega / Baixo Custo)': '#00CC96', # Greenish
+                                 '🏆 Premium (Líderes / Caro)': '#636EFA', # Blue
+                                 '⚠️ Baixo Retorno / Custo Alto': '#EF553B', # Red
+                                 '📉 Baixa Visibilidade': '#AB63FA' # Purple
+                             }
+
+                             col_scout1, col_scout2 = st.columns([1, 1.5])
+                             
+                             with col_scout1:
+                                 st.write("📊 Top Eficiência (Gols / Custo)")
+                                 st.dataframe(
+                                     df_merged[['Time', 'GP', 'Valor_Patrocinio']].sort_values(by='GP', ascending=False), # Show raw data sorted by Goals but context is ROI
+                                     column_config={
+                                         "Valor_Patrocinio": st.column_config.NumberColumn("Score Valor", format="%.1f"),
+                                         "GP": "Gols"
+                                     },
+                                     hide_index=True
+                                 )
+
+                             with col_scout2:
+                                 st.write("📈 Matriz de Decisão: Visibilidade x Custo")
+                                 fig_roi = px.scatter(
+                                     df_merged,
+                                     x='Valor_Patrocinio',
+                                     y='GP',
+                                     color='Categoria ROI',
+                                     text='Time',
+                                     color_discrete_map=color_map_roi,
+                                     title="Onde investir meu dinheiro?",
+                                     labels={'Valor_Patrocinio': 'Custo (Valuation Score)', 'GP': 'Retorno (Gols)'}
+                                 )
+                                 # Add reference lines (medians)
+                                 fig_roi.add_vline(x=median_val, line_dash="dash", line_color="grey", annotation_text="Custo Médio")
+                                 fig_roi.add_hline(y=median_gp, line_dash="dash", line_color="grey", annotation_text="Entrega Média")
+                                 
+                                 fig_roi.update_traces(textposition='top center', marker=dict(size=10))
+                                 st.plotly_chart(fig_roi, key=f"roi_{escolha_liga}")
                         
-                        if not df_targets.empty:
-                            # Find the max Goals For in this subset
-                            max_gp_target = df_targets['GP'].max()
-                            # Get the team(s) with this max GP
-                            recommendations = df_targets[df_targets['GP'] == max_gp_target]
-                            
-                            team_rec = recommendations.iloc[0]['Time']
-                            pos_rec = recommendations.iloc[0]['Posição']
-                            gp_rec = recommendations.iloc[0]['GP']
-                            
-                            st.success(f"🌟 **Recomendação de Investimento: {team_rec}**")
-                            st.markdown(f"""
-                            **Análise do Algoritmo:**
-                            - O **{team_rec}** ocupa a **{pos_rec}ª posição**, o que reduz o custo do patrocínio comparado aos líderes.
-                            - Porém, o time marcou **{gp_rec} gols**, garantindo alta visibilidade na TV.
-                            - **Veredito:** Melhor custo-benefício para curto prazo.
-                            """)
                         else:
-                            st.info("Todos os times com ataques fortes já estão no Top 4. Considere investir nos líderes para cobertura máxima.")
-
-                        col_scout1, col_scout2 = st.columns(2)
-                        
-                        with col_scout1:
-                            st.write("📊 Eficiência Ofensiva (Gols / Jogo)")
-                            st.dataframe(
-                                df_tabela[['Posição', 'Time', 'GP', 'J', 'Eficiência (Gols/Jogo)']].sort_values(by='Eficiência (Gols/Jogo)', ascending=False),
-                                hide_index=True
-                            )
-                            
-                        with col_scout2:
-                            st.write("📈 Mapa de Oportunidade")
-                            # Scatter focusing on Position vs Goals (Marketing View)
-                            
-                            # Define helper to determine category based on 'team_rec' (calculated above)
-                            # We assume 'team_rec' might exist if df_targets was not empty.
-                            # Initialize safe fallback if no rec found
-                            target_team_name = team_rec if 'team_rec' in locals() else None
-
-                            def get_scout_category(row):
-                                if target_team_name and row['Time'] == target_team_name:
-                                    return 'Recomendação' # Gold
-                                elif row['Posição'] <= 4:
-                                    return 'Elite (Top 4)' # LightGreen
-                                else:
-                                    return 'Outros' # LightBlue
-
-                            df_tabela['scout_color'] = df_tabela.apply(get_scout_category, axis=1)
-                            
-                            # Label logic: Show name ONLY for Recommendation
-                            def get_scout_label(row):
-                                if target_team_name and row['Time'] == target_team_name:
-                                    return row['Time']
-                                else:
-                                    return ''
-                            
-                            df_tabela['scout_label'] = df_tabela.apply(get_scout_label, axis=1)
-                            
-                            color_map_scout = {
-                                'Recomendação': '#FFD700', # Gold
-                                'Elite (Top 4)': 'lightgreen', 
-                                'Outros': 'lightblue'
-                            }
-
-                            fig_opp = px.scatter(
-                                df_tabela,
-                                x='Posição',
-                                y='GP',
-                                text='scout_label', 
-                                hover_data=['Time', 'Eficiência (Gols/Jogo)'],
-                                color='scout_color',
-                                color_discrete_map=color_map_scout,
-                                title="Posição x Gols (Busca por Oportunidades)",
-                                labels={'Posição': 'Posição na Tabela (Direita = Menor Custo)', 'GP': 'Gols Marcados (TV Time)', 'scout_color': 'Legenda'}
-                            )
-                            # Add vertical line separating Top 4
-                            fig_opp.add_vline(x=4.5, line_width=1, line_dash="dash", line_color="grey")
-                            fig_opp.add_annotation(x=15, y=df_tabela['GP'].max(), text="Zona de Oportunidade (Investimento)", showarrow=False, font=dict(color="green"))
-                            
-                            fig_opp.update_traces(textposition='top center', marker=dict(size=10))
-                            st.plotly_chart(fig_opp, key=f"opp_{escolha_liga}_{escolha_season}")
+                            st.warning("Valuation de patrocínio não disponível para realizar a análise cruzada.")
 
                     with tab_longo:
                         st.markdown("### Análise de Consistência Histórica")
