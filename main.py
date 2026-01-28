@@ -211,9 +211,9 @@ def main():
                             column_config={
                                 "Time": "Time",
                                 "Valor_Patrocinio": st.column_config.NumberColumn("Score Final", format="%.2f"),
-                                "Pontos_Publico": "Pts Público (60%)",
+                                "Pontos_Publico": "Pts Público (50%)",
                                 "Pontos_Historico": "Pts Histórico (30%)",
-                                "Pontos_Atual": "Pts Atual (10%)",
+                                "Pontos_Atual": "Pts Atual (20%)",
                                 "Media_Publico": "Média Público"
                             },
                             hide_index=True,
@@ -227,9 +227,9 @@ def main():
                         # We need to reverse calculate the weighted values to show stacked bar correctly,
                         # OR just show the raw points. Stacked bar of weighted contribution is better for "Valuation".
                     
-                        top10['Contrib. Público'] = top10['Pontos_Publico'] * 0.6
+                        top10['Contrib. Público'] = top10['Pontos_Publico'] * 0.5
                         top10['Contrib. Histórico'] = top10['Pontos_Historico'] * 0.3
-                        top10['Contrib. Atual'] = top10['Pontos_Atual'] * 0.1
+                        top10['Contrib. Atual'] = top10['Pontos_Atual'] * 0.2
                     
                         df_melted_pat = top10.melt(
                             id_vars=['Time'], 

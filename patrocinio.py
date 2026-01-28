@@ -367,9 +367,9 @@ def calcular_valor_patrocinio(codigo_liga, temporada):
     # Calcular Valor Final
     lista_final = []
     for nome, dados in tabela_final.items():
-        v = (dados['Pontos_Publico'] * 0.6) + \
+        v = (dados['Pontos_Publico'] * 0.5) + \
             (dados['Pontos_Historico'] * 0.3) + \
-            (dados['Pontos_Atual'] * 0.1)
+            (dados['Pontos_Atual'] * 0.2)
             
         dados['Valor_Patrocinio'] = round(v, 2)
         lista_final.append(dados)
