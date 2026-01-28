@@ -11,7 +11,7 @@ def obter_codigo_liga(nome_liga):
         "Ligue 1": "FL1",
         "Bundesliga": "BL1",
         "Serie A": "SA",
-        "Primera Division": "PD",
+        "La Liga": "PD",
     }
     return ligas.get(nome_liga)
 
