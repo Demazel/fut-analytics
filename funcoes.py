@@ -56,6 +56,10 @@ def obter_dados_ligas(codigo_liga, escolha_season):
                     
                     # Se for lista, retorna direto. Se for dict com 'standings', processa.
                     if isinstance(conteudo, list):
+                        # Fix: Ensure 'posicao' exists
+                        for i, item in enumerate(conteudo):
+                            if 'posicao' not in item:
+                                item['posicao'] = i + 1
                         return conteudo
                     else:
                         dados = conteudo
