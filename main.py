@@ -16,7 +16,7 @@ def main():
     ligas_disponiveis = [
         "Campeonato Brasileiro Série A", "Premier League", 
         "Ligue 1", "Bundesliga", "Serie A", 
-        "Primera Division"
+        "La Liga"
     ]
     escolha_liga = st.sidebar.selectbox("Escolha um campeonato:", ligas_disponiveis)
     

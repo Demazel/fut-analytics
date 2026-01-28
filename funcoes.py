@@ -10,7 +10,7 @@ LIGAS_MAP = {
     "Ligue 1": "FL1",
     "Bundesliga": "BL1",
     "Serie A": "SA",
-    "Primera Division": "PD",
+    "La Liga": "PD",
 }
 
 def obter_codigo_liga(nome_liga):
@@ -40,9 +40,14 @@ def obter_dados_ligas(codigo_liga, escolha_season):
             # Encontrar nome da liga pelo codigo
             nome_liga = next((nome for nome, code in LIGAS_MAP.items() if code == codigo_liga), None)
             if nome_liga:
+                # Handle Exception for La Liga (Folder is Primera Division)
+                nome_pasta = nome_liga
+                if nome_liga == "La Liga":
+                    nome_pasta = "Primera Division"
+
                 # Tenta formatacao padrao dos arquivos salvos
                 # O arquivo está dentro de uma pasta com o nome da liga
-                nome_arquivo = f"{nome_liga}/tabela_{nome_liga}_{escolha_season}.json"
+                nome_arquivo = f"{nome_pasta}/tabela_{nome_pasta}_{escolha_season}.json"
                 
                 # Verifica se arquivo existe antes de abrir? Ou try/except
                 with open(nome_arquivo, "r", encoding="utf-8") as f:
