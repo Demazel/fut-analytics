@@ -60,6 +60,8 @@ def obter_dados_ligas(codigo_liga, escolha_season):
                         for i, item in enumerate(conteudo):
                             if 'posicao' not in item:
                                 item['posicao'] = i + 1
+                            if 'escudo' not in item:
+                                item['escudo'] = '' # Prevent KeyError
                         return conteudo
                     else:
                         dados = conteudo
