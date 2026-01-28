@@ -275,13 +275,13 @@ def main():
                              # 3. Find Best Opportunity
                              # User Request: "Time com mais gols que tem alta entrega com baixo custo"
                              
-                             mean_val = df_merged['Valor_Patrocinio'].mean()
-                             mean_gp = df_merged['GP'].mean()
+                             median_val = df_merged['Valor_Patrocinio'].median()
+                             median_gp = df_merged['GP'].median()
                              
-                             # Filter: High Delivery (GP >= Mean) AND Low Cost (Val <= Mean)
+                             # Filter: High Delivery (GP >= Median) AND Low Cost (Val <= Median)
                              opportunities = df_merged[
-                                 (df_merged['GP'] >= mean_gp) & 
-                                 (df_merged['Valor_Patrocinio'] <= mean_val)
+                                 (df_merged['GP'] >= median_gp) & 
+                                 (df_merged['Valor_Patrocinio'] <= median_val)
                              ]
                              
                              if not opportunities.empty:
@@ -292,7 +292,7 @@ def main():
                              else:
                                  # Fallback: If no team is in the "Gold Mine" quadrant
                                  # Pick the best ROI among the Top 50% of Goal Scorers (guarantees visibility)
-                                 top_scorers = df_merged[df_merged['GP'] >= mean_gp]
+                                 top_scorers = df_merged[df_merged['GP'] >= median_gp]
                                  if not top_scorers.empty:
                                       best_choice = top_scorers.sort_values(by='ROI_Score', ascending=False).iloc[0]
                                       label_veredicto = "Não há times de baixo custo com alta entrega. Esta é a opção mais eficiente entre os líderes de gols."
@@ -310,37 +310,24 @@ def main():
                              st.markdown(f"""
                              **Análise Estratégica:**
                              - **Alta Visibilidade:** {gp_rec} gols marcados.
-                             - **Baixo Custo:** Score de valuation {val_rec:.1f} (Abaixo da média de mercado: {mean_val:.1f}).
+                             - **Baixo Custo:** Score de valuation {val_rec:.1f} (Abaixo da média de mercado).
                              - **Veredito:** {label_veredicto}
                              """)
-
-                             st.markdown("### Ranking de Eficiência (ROI)")
-                             df_roi_table = df_merged[['Time', 'ROI_Score', 'GP', 'Valor_Patrocinio']].sort_values(by='ROI_Score', ascending=False)
-                             st.dataframe(
-                                 df_roi_table,
-                                 column_config={
-                                     "Time": "Time",
-                                     "ROI_Score": st.column_config.NumberColumn("Score ROI", format="%.2f"),
-                                     "GP": "Gols",
-                                     "Valor_Patrocinio": st.column_config.NumberColumn("Custo (Valuation)", format="%.2f")
-                                 },
-                                 hide_index=True,
-                                 use_container_width=True
-                             )
 
                              # 4. Scatter Plot: Valuation vs Goals
                              
                              # Define Quadrants
-                             # Use Mean for Quadrants
+                             median_val = df_merged['Valor_Patrocinio'].median()
+                             median_gp = df_merged['GP'].median()
                              
                              def get_quadrant(row):
                                  if row['Time'] == team_rec:
                                      return '⭐ Smart Choice'
-                                 elif row['GP'] >= mean_gp and row['Valor_Patrocinio'] <= mean_val:
+                                 elif row['GP'] >= median_gp and row['Valor_Patrocinio'] <= median_val:
                                      return '💎 Oportunidade (Alta Entrega / Baixo Custo)'
-                                 elif row['GP'] >= mean_gp and row['Valor_Patrocinio'] > mean_val:
+                                 elif row['GP'] >= median_gp and row['Valor_Patrocinio'] > median_val:
                                      return '🏆 Premium (Líderes / Caro)'
-                                 elif row['GP'] < mean_gp and row['Valor_Patrocinio'] > mean_val:
+                                 elif row['GP'] < median_gp and row['Valor_Patrocinio'] > median_val:
                                      return '⚠️ Baixo Retorno / Custo Alto'
                                  else:
                                      return '📉 Baixa Visibilidade'
@@ -352,28 +339,40 @@ def main():
                                  '💎 Oportunidade (Alta Entrega / Baixo Custo)': '#00CC96', # Greenish
                                  '🏆 Premium (Líderes / Caro)': '#636EFA', # Blue
                                  '⚠️ Baixo Retorno / Custo Alto': '#EF553B', # Red
-                                 '📉 Baixa Visibilidade': '#AB63FA'  # Purple
+                                 '📉 Baixa Visibilidade': '#AB63FA' # Purple
                              }
+
+                             col_scout1, col_scout2 = st.columns([1, 1.5])
                              
-                             st.write("� Matriz de Decisão: Visibilidade x Custo")
-                             fig_roi = px.scatter(
-                                 df_merged,
-                                 x='Valor_Patrocinio',
-                                 y='GP',
-                                 color='Categoria ROI',
-                                 text='Time',
-                                 color_discrete_map=color_map_roi,
-                                 hover_data=['Time', 'ROI_Score'],
-                                 title="Matriz de Decisão: Custo (Valuation) vs Retorno (Gols)",
-                                 labels={'Valor_Patrocinio': 'Custo (Valuation Score)', 'GP': 'Retorno (Gols)'}
-                             )
-                             fig_roi.update_traces(textposition='top center')
-                             
-                             # Add Reference Lines (Mean)
-                             fig_roi.add_vline(x=mean_val, line_dash="dash", line_color="gray", annotation_text="Média Custo")
-                             fig_roi.add_hline(y=mean_gp, line_dash="dash", line_color="gray", annotation_text="Média Gols")
+                             with col_scout1:
+                                 st.write("📊 Top Eficiência (Gols / Custo)")
+                                 st.dataframe(
+                                     df_merged[['Time', 'GP', 'Valor_Patrocinio']].sort_values(by='GP', ascending=False), # Show raw data sorted by Goals but context is ROI
+                                     column_config={
+                                         "Valor_Patrocinio": st.column_config.NumberColumn("Score Valor", format="%.1f"),
+                                         "GP": "Gols"
+                                     },
+                                     hide_index=True
+                                 )
+
+                             with col_scout2:
+                                 st.write("📈 Matriz de Decisão: Visibilidade x Custo")
+                                 fig_roi = px.scatter(
+                                     df_merged,
+                                     x='Valor_Patrocinio',
+                                     y='GP',
+                                     color='Categoria ROI',
+                                     text='Time',
+                                     color_discrete_map=color_map_roi,
+                                     title="Onde investir meu dinheiro?",
+                                     labels={'Valor_Patrocinio': 'Custo (Valuation Score)', 'GP': 'Retorno (Gols)'}
+                                 )
+                                 # Add reference lines (medians)
+                                 fig_roi.add_vline(x=median_val, line_dash="dash", line_color="grey", annotation_text="Custo Médio")
+                                 fig_roi.add_hline(y=median_gp, line_dash="dash", line_color="grey", annotation_text="Entrega Média")
                                  
-                             st.plotly_chart(fig_roi, key=f"roi_{escolha_liga}")
+                                 fig_roi.update_traces(textposition='top center', marker=dict(size=10))
+                                 st.plotly_chart(fig_roi, key=f"roi_{escolha_liga}")
                         
                         else:
                             st.warning("Valuation de patrocínio não disponível para realizar a análise cruzada.")
