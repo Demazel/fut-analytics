@@ -337,7 +337,8 @@ def calcular_valor_patrocinio(codigo_liga, temporada):
         nome_normalizado = normalizar_nome(nome_original)
         
         tabela_final[nome_normalizado] = {
-            'Time': nome_original, # Mantém o nome original para exibição se quiser
+            'Time': nome_normalizado, # Alterado para bater com API no merge do main.py
+            'Nome_Original': nome_original, 
             'Nome_Normalizado': nome_normalizado,
             'Pontos_Publico': p.get('Pontuacao', 0),
             'Pontos_Historico': 0,
