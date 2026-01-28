@@ -2,6 +2,7 @@ import streamlit as st
 import plotly.express as px
 from funcoes import *
 from data_frames import *
+from patrocinio import calcular_valor_patrocinio
 
 
 def main():
@@ -354,6 +355,77 @@ def main():
                                 
                 except Exception as e:
                     st.error(f"Erro ao exibir dados para {escolha_liga} ({escolha_season}): {e}")
+
+                # --- Valuation de Patrocínio ---
+                st.divider()
+                st.subheader("💰 Valuation de Patrocínio (Modelo 3 Pilares)")
+                
+                with st.spinner("Calculando valor de patrocínio..."):
+                     dados_patrocinio = calcular_valor_patrocinio(codigo_liga, escolha_season)
+                     
+                if dados_patrocinio:
+                    # Metrics for Top 3
+                    top3 = dados_patrocinio[:3]
+                    cols_metrics = st.columns(3)
+                    
+                    medals = ["🥇", "🥈", "🥉"]
+                    
+                    for i, time in enumerate(top3):
+                        with cols_metrics[i]:
+                            st.metric(
+                                label=f"{medals[i]} {time['Time']}",
+                                value=f"{time['Valor_Patrocinio']}",
+                                delta=f"Público: {time['Pontos_Publico']} | Hist: {time['Pontos_Historico']}"
+                            )
+                            
+                    # Table
+                    df_patrocinio = pd.DataFrame(dados_patrocinio)
+                    
+                    st.markdown("### Ranking Completo")
+                    st.dataframe(
+                        df_patrocinio[['Time', 'Valor_Patrocinio', 'Pontos_Publico', 'Pontos_Historico', 'Pontos_Atual', 'Media_Publico']],
+                        column_config={
+                            "Time": "Time",
+                            "Valor_Patrocinio": st.column_config.NumberColumn("Score Final", format="%.2f"),
+                            "Pontos_Publico": "Pts Público (60%)",
+                            "Pontos_Historico": "Pts Histórico (30%)",
+                            "Pontos_Atual": "Pts Atual (10%)",
+                            "Media_Publico": "Média Público"
+                        },
+                        hide_index=True,
+                        use_container_width=True
+                    )
+                    
+                    # Chart Breakdown for Top 10
+                    st.markdown("### Composição do Score (Top 10)")
+                    top10 = df_patrocinio.head(10).copy()
+                    
+                    # We need to reverse calculate the weighted values to show stacked bar correctly,
+                    # OR just show the raw points. Stacked bar of weighted contribution is better for "Valuation".
+                    
+                    top10['Contrib. Público'] = top10['Pontos_Publico'] * 0.6
+                    top10['Contrib. Histórico'] = top10['Pontos_Historico'] * 0.3
+                    top10['Contrib. Atual'] = top10['Pontos_Atual'] * 0.1
+                    
+                    df_melted_pat = top10.melt(
+                        id_vars=['Time'], 
+                        value_vars=['Contrib. Público', 'Contrib. Histórico', 'Contrib. Atual'],
+                        var_name='Componente',
+                        value_name='Pontos Ponderados'
+                    )
+                    
+                    fig_val = px.bar(
+                        df_melted_pat,
+                        x='Time',
+                        y='Pontos Ponderados',
+                        color='Componente',
+                        title="Composição do Valor de Patrocínio",
+                        labels={'Pontos Ponderados': 'Score Contribuído'}
+                    )
+                    st.plotly_chart(fig_val, key=f"val_{escolha_liga}")
+                    
+                else:
+                    st.warning("Não foi possível calcular o valuation de patrocínio (falta de dados de público ou histórico).")
 
             else:
                 st.warning(f"Não foi possível obter dados para {escolha_liga} ({escolha_season}).")

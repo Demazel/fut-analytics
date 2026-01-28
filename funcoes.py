@@ -129,4 +129,5 @@ def obter_dados_historicos(codigo_liga, temporada_atual):
         return historico
     except Exception as e:
         print(f"Erro ao obter historico: {e}")
-        return historico 
+        return historico
+
