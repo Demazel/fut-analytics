@@ -208,8 +208,9 @@ def main():
                     
                         st.markdown("### Ranking Completo")
                         st.dataframe(
-                            df_patrocinio[['Time', 'Valor_Patrocinio', 'Pontos_Publico', 'Pontos_Historico', 'Pontos_Atual', 'Media_Publico']],
+                            df_patrocinio[['Escudo', 'Time', 'Valor_Patrocinio', 'Pontos_Publico', 'Pontos_Historico', 'Pontos_Atual', 'Media_Publico']],
                             column_config={
+                                "Escudo": st.column_config.ImageColumn("Escudo", width="small"),
                                 "Time": "Time",
                                 "Valor_Patrocinio": st.column_config.NumberColumn("Score Final", format="%.2f"),
                                 "Pontos_Publico": "Pts Público (60%)",
@@ -306,6 +307,19 @@ def main():
                              val_rec = best_choice['Valor_Patrocinio']
                              pos_rec = best_choice['Posição']
                              
+                             # Classify ALL teams into Quadrants
+                             def classify_team(row):
+                                 if row['GP'] >= median_gp and row['Valor_Patrocinio'] <= median_val:
+                                     return "💎 Oportunidade"
+                                 elif row['GP'] >= median_gp and row['Valor_Patrocinio'] > median_val:
+                                     return "🏆 Premium"
+                                 elif row['GP'] < median_gp and row['Valor_Patrocinio'] > median_val:
+                                     return "⚠️ Ineficiente"
+                                 else:
+                                     return "🛡️ Baixo Impacto"
+
+                             df_merged['Veredito'] = df_merged.apply(classify_team, axis=1)
+
                              st.success(f"🚀 **Oportunidade Inteligente: {team_rec}**")
                              st.markdown(f"""
                              **Análise Estratégica:**
@@ -313,6 +327,20 @@ def main():
                              - **Baixo Custo:** Score de valuation {val_rec:.1f} (Abaixo da média de mercado).
                              - **Veredito:** {label_veredicto}
                              """)
+                             
+                             st.markdown("#### Análise Estratégica Completa (Todos os Times)")
+                             st.dataframe(
+                                 df_merged[['Time', 'Veredito', 'GP', 'Valor_Patrocinio', 'ROI_Score']].sort_values(by='ROI_Score', ascending=False),
+                                 column_config={
+                                     "Time": "Time",
+                                     "Veredito": "Classificação",
+                                     "GP": "Gols (Retorno)",
+                                     "Valor_Patrocinio": st.column_config.NumberColumn("Custo (Score)", format="%.2f"),
+                                     "ROI_Score": st.column_config.NumberColumn("ROI", format="%.4f")
+                                 },
+                                 hide_index=True,
+                                 use_container_width=True
+                             )
 
                              # 4. Scatter Plot: Valuation vs Goals
                              

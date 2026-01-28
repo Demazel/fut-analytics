@@ -295,7 +295,8 @@ def calcular_pontuacao_atual(codigo_liga, temporada_atual):
     for time_dado in dados_atuais:
         lista_atual.append({
             'nome': time_dado['nome'],
-            'posicao': time_dado['posicao']
+            'posicao': time_dado['posicao'],
+            'escudo': time_dado.get('escudo', '')
         })
         
     # Ordenar por posição
@@ -363,6 +364,9 @@ def calcular_valor_patrocinio(codigo_liga, temporada):
         nome = a['nome']
         if nome in tabela_final:
             tabela_final[nome]['Pontos_Atual'] = a['Pontuacao_Atual']
+            # Add Crest if available
+            if 'escudo' in a:
+                tabela_final[nome]['Escudo'] = a['escudo']
             
     # Calcular Valor Final
     lista_final = []
