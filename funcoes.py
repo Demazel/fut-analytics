@@ -4,18 +4,21 @@ import pandas as pd
 import streamlit as st
 from data_frames import *
 
+LIGAS_MAP = {
+    "Campeonato Brasileiro Série A": "BSA",
+    "Premier League": "PL",
+    "Ligue 1": "FL1",
+    "Bundesliga": "BL1",
+    "Serie A": "SA",
+    "La Liga": "PD",
+}
+
 def obter_codigo_liga(nome_liga):
-    ligas = {
-        "Campeonato Brasileiro Série A": "BSA",
-        "Premier League": "PL",
-        "Ligue 1": "FL1",
-        "Bundesliga": "BL1",
-        "Serie A": "SA",
-        "La Liga": "PD",
-    }
-    return ligas.get(nome_liga)
+    return LIGAS_MAP.get(nome_liga)
 
 def obter_dados_ligas(codigo_liga, escolha_season):
+    dados = None
+    # 1. Tentativa via API
     try:
         url = f"https://api.football-data.org/v4/competitions/{codigo_liga}/standings"
         headers = {
@@ -26,11 +29,41 @@ def obter_dados_ligas(codigo_liga, escolha_season):
         }
         
         response = requests.get(url, headers=headers, params=params)
-        dados = response.json()
-        
+        if response.status_code == 200:
+             dados = response.json()
+    except Exception as e:
+        print(f"Erro API: {e}")
+
+    # 2. Tentativa via Arquivo Local (Fallback)
+    if not dados or 'standings' not in dados:
+        try:
+            # Encontrar nome da liga pelo codigo
+            nome_liga = next((nome for nome, code in LIGAS_MAP.items() if code == codigo_liga), None)
+            if nome_liga:
+                # Tenta formatacao padrao dos arquivos salvos
+                nome_arquivo = f"tabela_{nome_liga}_{escolha_season}.json"
+                # Verifica se arquivo existe antes de abrir? Ou try/except
+                with open(nome_arquivo, "r", encoding="utf-8") as f:
+                    # O arquivo local ja estaria formatado no padrao da API ou padrao processado?
+                    # Pelos logs anteriores, 'tabela_xxx.json' existe. 
+                    # Vamos assumir que ele contem o JSON puro da API ou o processado?
+                    # O usuario queria "salvar o json".
+                    # Se for o JSON processado (lista), o parsing abaixo vai falhar pois espera {'standings': ...}
+                    # Vamos verificar o CONTEUDO do arquivo.
+                    conteudo = json.load(f)
+                    
+                    # Se for lista, retorna direto. Se for dict com 'standings', processa.
+                    if isinstance(conteudo, list):
+                        return conteudo
+                    else:
+                        dados = conteudo
+        except Exception as e:
+            print(f"Erro Arquivo Local: {e}")
+
+    try:
         tabela_formatada = []
         
-        if 'standings' in dados:
+        if dados and 'standings' in dados:
             # Find specific tables ensuring we get TOTAL, HOME, and AWAY
             tabela_total = next((s['table'] for s in dados['standings'] if s['type'] == 'TOTAL'), [])
             tabela_home = next((s['table'] for s in dados['standings'] if s['type'] == 'HOME'), [])
@@ -61,7 +94,7 @@ def obter_dados_ligas(codigo_liga, escolha_season):
                 
         return tabela_formatada 
     except Exception as e:
-        print(f"Erro ao obter dados: {e}")
+        print(f"Erro ao processar dados: {e}")
         return None 
 
 def melhor_ataque(df_tabela):
