@@ -10,7 +10,7 @@ LIGAS_MAP = {
     "Ligue 1": "FL1",
     "Bundesliga": "BL1",
     "Serie A": "SA",
-    "La Liga": "PD",
+    "Primera Division": "PD",
 }
 
 def obter_codigo_liga(nome_liga):
