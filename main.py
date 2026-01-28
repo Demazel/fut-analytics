@@ -330,9 +330,9 @@ def main():
                              
                              st.markdown("#### Análise Estratégica Completa (Todos os Times)")
                              st.dataframe(
-                                 df_merged[['escudo', 'Time', 'Veredito', 'GP', 'Valor_Patrocinio', 'ROI_Score']].sort_values(by='ROI_Score', ascending=False),
+                                 df_merged[['Escudo', 'Time', 'Veredito', 'GP', 'Valor_Patrocinio', 'ROI_Score']].sort_values(by='ROI_Score', ascending=False),
                                  column_config={
-                                     "escudo": st.column_config.ImageColumn("Escudo", width="small"),
+                                     "Escudo": st.column_config.ImageColumn("Escudo", width="small"),
                                      "Time": "Time",
                                      "Veredito": "Classificação",
                                      "GP": "Gols (Retorno)",
