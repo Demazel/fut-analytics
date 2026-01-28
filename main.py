@@ -40,7 +40,7 @@ def main():
                 dados_artilheiros = obter_dados_artilheiros(codigo_liga, escolha_season)
             
             if fonte == "Arquivo Local":
-                st.warning("⚠️ Erro ao carregar API. Exibindo dados salvos localmente (Backup).")
+                st.warning("⚠️ API Indisponível no momento (Limite de Requisições ou Conexão). Exibindo dados locais (Backup).")
             
             if dados:
                 
