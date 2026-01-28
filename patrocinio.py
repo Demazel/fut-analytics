@@ -40,6 +40,8 @@ def calcular_pontuacao_publico(codigo_liga, temporada):
         # Ordenar por Media_Publico decrescente
         # Garantir que Media_Publico seja numérico
         for time in dados:
+             if 'Media_Publico' not in time:
+                 time['Media_Publico'] = 0
              if isinstance(time['Media_Publico'], str):
                  time['Media_Publico'] = int(str(time['Media_Publico']).replace('.', '').replace(',', ''))
                  

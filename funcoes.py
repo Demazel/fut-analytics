@@ -75,6 +75,11 @@ def obter_dados_ligas(codigo_liga, escolha_season):
                                 item['vitorias'] = 0
                             if 'derrotas' not in item:
                                 item['derrotas'] = 0
+                            # Prevent crash in Home/Away chart if missing
+                            if 'gols_casa' not in item:
+                                item['gols_casa'] = 0
+                            if 'gols_fora' not in item:
+                                item['gols_fora'] = 0
                         return conteudo
                     else:
                         dados = conteudo

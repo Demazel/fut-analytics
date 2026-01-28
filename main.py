@@ -135,21 +135,24 @@ def main():
                         'Outros': 'lightblue'
                     }
                     
-                    fig = px.scatter(
-                        df_tabela, 
-                        x='GP', 
-                        y='GC', 
-                        hover_data=['Time'], 
-                        text='Time',
-                        color='categoria',
-                        color_discrete_map=color_map,
-                        title=f'Dispersão de Gols - {escolha_liga} ({escolha_season})',
-                        labels={'GP': 'Gols Pró', 'GC': 'Gols Sofridos', 'categoria': 'Legenda'}
-                    )
-                    
-                    fig.update_traces(textposition='top center', marker=dict(size=12))
+                    try:
+                        fig = px.scatter(
+                            df_tabela, 
+                            x='GP', 
+                            y='GC', 
+                            hover_data=['Time'], 
+                            text='Time',
+                            color='categoria',
+                            color_discrete_map=color_map,
+                            title=f'Dispersão de Gols - {escolha_liga} ({escolha_season})',
+                            labels={'GP': 'Gols Pró', 'GC': 'Gols Sofridos', 'categoria': 'Legenda'}
+                        )
+                        
+                        fig.update_traces(textposition='top center', marker=dict(size=12))
 
-                    st.plotly_chart(fig, key=f"scatter_{escolha_liga}_{escolha_season}")
+                        st.plotly_chart(fig, key=f"scatter_{escolha_liga}_{escolha_season}")
+                    except Exception as e:
+                        st.warning(f"Não foi possível gerar o gráfico de dispersão: {e}")
 
 
 
@@ -158,27 +161,33 @@ def main():
                     st.subheader("🏠 Desempenho: Gols Mandante x Visitante")
                     
                     # Prepare dataframe: Top 12 Offensive Teams
-                    df_ha = df_tabela.sort_values(by='GP', ascending=False).head(12)
-                    
-                    # Melt dataframe for Plotly
-                    df_melted_ha = df_ha.melt(id_vars=['Time'], value_vars=['gols_casa', 'gols_fora'], var_name='Local', value_name='Gols')
-                    
-                    fig_ha = px.bar(
-                        df_melted_ha, 
-                        x='Time', 
-                        y='Gols', 
-                        color='Local', 
-                        title="Top 12 Ataques: Onde eles marcam mais?",
-                        barmode='group',
-                        labels={'Local': 'Mando', 'Gols': 'Gols Marcados', 'Time': 'Time'},
-                        color_discrete_map={'gols_casa': '#3498db', 'gols_fora': '#e74c3c'}
-                    )
-                    
-                    # Rename Legend Items
-                    new_names = {'gols_casa': 'Em Casa 🏠', 'gols_fora': 'Fora de Casa ✈️'}
-                    fig_ha.for_each_trace(lambda t: t.update(name = new_names.get(t.name, t.name)))
-                    
-                    st.plotly_chart(fig_ha, key=f"ha_{escolha_liga}_{escolha_season}")
+                    try:
+                        if 'gols_casa' in df_tabela.columns and 'gols_fora' in df_tabela.columns:
+                            df_ha = df_tabela.sort_values(by='GP', ascending=False).head(12)
+                            
+                            # Melt dataframe for Plotly
+                            df_melted_ha = df_ha.melt(id_vars=['Time'], value_vars=['gols_casa', 'gols_fora'], var_name='Local', value_name='Gols')
+                            
+                            fig_ha = px.bar(
+                                df_melted_ha, 
+                                x='Time', 
+                                y='Gols', 
+                                color='Local', 
+                                title="Top 12 Ataques: Onde eles marcam mais?",
+                                barmode='group',
+                                labels={'Local': 'Mando', 'Gols': 'Gols Marcados', 'Time': 'Time'},
+                                color_discrete_map={'gols_casa': '#3498db', 'gols_fora': '#e74c3c'}
+                            )
+                            
+                            # Rename Legend Items
+                            new_names = {'gols_casa': 'Em Casa 🏠', 'gols_fora': 'Fora de Casa ✈️'}
+                            fig_ha.for_each_trace(lambda t: t.update(name = new_names.get(t.name, t.name)))
+                            
+                            st.plotly_chart(fig_ha, key=f"ha_{escolha_liga}_{escolha_season}")
+                        else:
+                            st.info("Dados de Gols Mandante/Visitante não disponíveis para esta temporada.")
+                    except Exception as e:
+                        st.warning(f"Erro ao gerar gráfico Mandante/Visitante: {e}")
 
                     # --- Valuation de Patrocínio ---
                     st.divider()
