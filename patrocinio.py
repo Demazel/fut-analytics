@@ -219,6 +219,23 @@ NAME_MAPPING = {
     "Granada": "Granada CF",
     "Almería": "UD Almería",
     "Cadiz": "Cádiz CF",
+    "RCD Espanyol": "RCD Espanyol de Barcelona", 
+
+    # Additional Historical/Variations found in check_all_names
+    "Napoli": "SSC Napoli",
+    "América Mineiro": "América FC (Minas Gerais)",
+    "Coritiba FC": "Coritiba FBC",
+    "Sport Recife": "SC Recife",
+    "AFC Sunderland": "Sunderland AFC",
+    "FC Southampton": "Southampton FC",
+    "AC Ajaccio": "AC Ajaccio", # Check verification if needed
+    "ESTAC Troyes": "ES Troyes AC",
+    "Hertha Berlim": "Hertha BSC",
+    "Schalke 04": "FC Schalke 04",
+    "FC St. Pauli": "FC St. Pauli 1910",
+    "Pisa Sporting Club": "Pisa Sporting Club", # Serie B?
+    "Spezia Calcio": "Spezia Calcio", 
+    "UC Sampdoria": "UC Sampdoria",
 }
 
 def normalizar_nome(nome):
