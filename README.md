@@ -49,7 +49,6 @@ Este projeto é uma aplicação web de analytics de futebol construída com **St
 
 - `main.py`: Arquivo principal da aplicação Streamlit.
 - `funcoes.py`: Funções auxiliares para busca e processamento de dados.
-- `graficos.py` / `graficos/`: Módulos responsáveis pela geração de visualizações.
 - `patrocinio.py`: Lógica para cálculo de valuation e score de patrocínio.
 - `data_frames.py`: Manipulação e limpeza de DataFrames.
 - `requirements.txt`: Lista de dependências do Python.
