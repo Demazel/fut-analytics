@@ -57,5 +57,7 @@ Este projeto é uma aplicação web de analytics de futebol construída com **St
 
 O projeto consome dados de APIs de futebol (como API-Football) ou utiliza arquivos locais em JSON como backup caso a API esteja indisponível.
 
+Site do projeto: https://fut-analytics.streamlit.app/
+
 ---
 Desenvolvido com ❤️ para fãs de futebol e dados.
