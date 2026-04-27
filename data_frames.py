@@ -1,10 +1,9 @@
 import pandas as pd
-from funcoes import *
+
 
 def data_frames(dados):
-    df_tabela = pd.DataFrame(dados)
-    return df_tabela   
+    return pd.DataFrame(dados)
     
+
 def data_frames_artilheiros(dados):
-    df_artilheiros = pd.DataFrame(dados)
-    return df_artilheiros  
+    return pd.DataFrame(dados)

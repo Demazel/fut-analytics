@@ -1,192 +1,195 @@
-import requests
 import json
-import pandas as pd
-import streamlit as st
-from data_frames import *
 
-LIGAS_MAP = {
-    "Campeonato Brasileiro Série A": "BSA",
-    "Premier League": "PL",
-    "Ligue 1": "FL1",
-    "Bundesliga": "BL1",
-    "Serie A": "SA",
-    "La Liga": "PD",
-}
+import requests
+import streamlit as st
+
+from config import BASE_DIR, LIGAS_MAP, PASTAS_TABELAS
+
+
+API_BASE_URL = "https://api.football-data.org/v4"
+TIMEOUT_SECONDS = 15
+
 
 def obter_codigo_liga(nome_liga):
     return LIGAS_MAP.get(nome_liga)
 
+
+def _obter_nome_liga(codigo_liga):
+    return next((nome for nome, code in LIGAS_MAP.items() if code == codigo_liga), None)
+
+
+def _obter_headers_api():
+    try:
+        token = st.secrets.get("API_TOKEN")
+    except Exception:
+        token = None
+
+    if not token:
+        return None
+    return {"X-Auth-Token": token}
+
+
+def _buscar_api(endpoint, codigo_liga, temporada):
+    headers = _obter_headers_api()
+    if not headers:
+        return None
+
+    url = f"{API_BASE_URL}/competitions/{codigo_liga}/{endpoint}"
+    response = requests.get(
+        url,
+        headers=headers,
+        params={"season": temporada},
+        timeout=TIMEOUT_SECONDS,
+    )
+    if response.status_code != 200:
+        return None
+    return response.json()
+
+
+def _caminho_tabela_local(codigo_liga, temporada):
+    nome_liga = _obter_nome_liga(codigo_liga)
+    if not nome_liga:
+        return None
+
+    nome_pasta = PASTAS_TABELAS.get(nome_liga, nome_liga)
+    return BASE_DIR / nome_pasta / f"tabela_{nome_pasta}_{temporada}.json"
+
+
+def _normalizar_linha_tabela(item, posicao):
+    gols_pro = item.get("gols_pro", 0)
+    gols_contra = item.get("gols_contra", 0)
+
+    return {
+        **item,
+        "posicao": item.get("posicao", posicao),
+        "escudo": item.get("escudo", ""),
+        "pontos": item.get("pontos", 0),
+        "jogos": item.get("jogos", 0),
+        "vitorias": item.get("vitorias", 0),
+        "derrotas": item.get("derrotas", 0),
+        "gols_pro": gols_pro,
+        "gols_contra": gols_contra,
+        "saldo_gols": item.get("saldo_gols", gols_pro - gols_contra),
+        "gols_casa": item.get("gols_casa", 0),
+        "gols_fora": item.get("gols_fora", 0),
+    }
+
+
+def _carregar_tabela_local(codigo_liga, temporada):
+    caminho_arquivo = _caminho_tabela_local(codigo_liga, temporada)
+    if not caminho_arquivo or not caminho_arquivo.exists():
+        return None
+
+    with caminho_arquivo.open("r", encoding="utf-8") as arquivo:
+        conteudo = json.load(arquivo)
+
+    if isinstance(conteudo, list):
+        return [_normalizar_linha_tabela(item, index + 1) for index, item in enumerate(conteudo)]
+
+    return conteudo
+
+
+def _formatar_tabela_api(dados):
+    if not dados or "standings" not in dados:
+        return []
+
+    tabela_total = next((s["table"] for s in dados["standings"] if s["type"] == "TOTAL"), [])
+    tabela_home = next((s["table"] for s in dados["standings"] if s["type"] == "HOME"), [])
+    tabela_away = next((s["table"] for s in dados["standings"] if s["type"] == "AWAY"), [])
+
+    gols_casa_por_time = {item["team"]["name"]: item["goalsFor"] for item in tabela_home}
+    gols_fora_por_time = {item["team"]["name"]: item["goalsFor"] for item in tabela_away}
+
+    tabela_formatada = []
+    for item in tabela_total:
+        nome_time = item["team"]["name"]
+        tabela_formatada.append(
+            {
+                "posicao": item["position"],
+                "escudo": item["team"]["crest"],
+                "nome": nome_time,
+                "pontos": item["points"],
+                "jogos": item["playedGames"],
+                "vitorias": item["won"],
+                "derrotas": item["lost"],
+                "gols_pro": item["goalsFor"],
+                "gols_contra": item["goalsAgainst"],
+                "saldo_gols": item["goalDifference"],
+                "gols_casa": gols_casa_por_time.get(nome_time, 0),
+                "gols_fora": gols_fora_por_time.get(nome_time, 0),
+            }
+        )
+
+    return tabela_formatada
+
+
 def obter_dados_ligas(codigo_liga, escolha_season):
-    dados = None
-    # 1. Tentativa via API
     try:
-        url = f"https://api.football-data.org/v4/competitions/{codigo_liga}/standings"
-        headers = {
-            "X-Auth-Token": st.secrets["API_TOKEN"]
-        }
-        params = {
-            "season": escolha_season
-        }
-        
-        response = requests.get(url, headers=headers, params=params)
-        if response.status_code == 200:
-             dados = response.json()
-    except Exception as e:
-        print(f"Erro API: {e}")
-
-    # 2. Tentativa via Arquivo Local (Fallback)
-    if not dados or 'standings' not in dados:
-        try:
-            # Encontrar nome da liga pelo codigo
-            nome_liga = next((nome for nome, code in LIGAS_MAP.items() if code == codigo_liga), None)
-            if nome_liga:
-                # Handle Exception for La Liga (Folder is Primera Division)
-                nome_pasta = nome_liga
-                if nome_liga == "La Liga":
-                    nome_pasta = "Primera Division"
-
-                # Tenta formatacao padrao dos arquivos salvos
-                # O arquivo está dentro de uma pasta com o nome da liga
-                nome_arquivo = f"{nome_pasta}/tabela_{nome_pasta}_{escolha_season}.json"
-                
-                # Verifica se arquivo existe antes de abrir? Ou try/except
-                with open(nome_arquivo, "r", encoding="utf-8") as f:
-                    # O arquivo local ja estaria formatado no padrao da API ou padrao processado?
-                    # Pelos logs anteriores, 'tabela_xxx.json' existe. 
-                    # Vamos assumir que ele contem o JSON puro da API ou o processado?
-                    # O usuario queria "salvar o json".
-                    # Se for o JSON processado (lista), o parsing abaixo vai falhar pois espera {'standings': ...}
-                    # Vamos verificar o CONTEUDO do arquivo.
-                    conteudo = json.load(f)
-                    
-                    # Se for lista, retorna direto. Se for dict com 'standings', processa.
-                    if isinstance(conteudo, list):
-                        # Fix: Ensure 'posicao' exists
-                        for i, item in enumerate(conteudo):
-                            if 'posicao' not in item:
-                                item['posicao'] = i + 1
-                            if 'escudo' not in item:
-                                item['escudo'] = '' # Prevent KeyError
-                            if 'saldo_gols' not in item and 'gols_pro' in item and 'gols_contra' in item:
-                                item['saldo_gols'] = item['gols_pro'] - item['gols_contra']
-                            if 'jogos' not in item:
-                                item['jogos'] = 0
-                            if 'vitorias' not in item:
-                                item['vitorias'] = 0
-                            if 'derrotas' not in item:
-                                item['derrotas'] = 0
-                            # Prevent crash in Home/Away chart if missing
-                            if 'gols_casa' not in item:
-                                item['gols_casa'] = 0
-                            if 'gols_fora' not in item:
-                                item['gols_fora'] = 0
-                        return conteudo, "Arquivo Local"
-                    else:
-                        dados = conteudo
-        except Exception as e:
-            print(f"Erro Arquivo Local: {e}")
+        dados_api = _buscar_api("standings", codigo_liga, escolha_season)
+        tabela_api = _formatar_tabela_api(dados_api)
+        if tabela_api:
+            return tabela_api, "API"
+    except Exception as erro:
+        print(f"Erro API: {erro}")
 
     try:
-        tabela_formatada = []
-        
-        if dados and 'standings' in dados:
-            # Find specific tables ensuring we get TOTAL, HOME, and AWAY
-            tabela_total = next((s['table'] for s in dados['standings'] if s['type'] == 'TOTAL'), [])
-            tabela_home = next((s['table'] for s in dados['standings'] if s['type'] == 'HOME'), [])
-            tabela_away = next((s['table'] for s in dados['standings'] if s['type'] == 'AWAY'), [])
-            
-            # Map Home/Away goals by team name for easy lookup
-            dict_home = {t['team']['name']: t['goalsFor'] for t in tabela_home}
-            dict_away = {t['team']['name']: t['goalsFor'] for t in tabela_away}
+        dados_locais = _carregar_tabela_local(codigo_liga, escolha_season)
+        if isinstance(dados_locais, list):
+            return dados_locais, "Arquivo Local"
+        return _formatar_tabela_api(dados_locais), "Arquivo Local"
+    except Exception as erro:
+        print(f"Erro Arquivo Local: {erro}")
 
-            for item in tabela_total:
-                nome_time = item['team']['name']
-                dados_time = {
-                    "posicao": item['position'],
-                    "escudo": item['team']['crest'],
-                    "nome": nome_time,
-                    "pontos": item['points'],
-                    "jogos": item['playedGames'],
-                    "vitorias": item['won'],
-                    "derrotas": item['lost'],
-                    "gols_pro": item['goalsFor'],
-                    "gols_contra": item['goalsAgainst'],
-                    "saldo_gols": item['goalDifference'],
-                    # New helper columns for Home/Away analysis
-                    "gols_casa": dict_home.get(nome_time, 0),
-                    "gols_fora": dict_away.get(nome_time, 0)
-                }
-                tabela_formatada.append(dados_time)
-                
-        return tabela_formatada, "API"
-    except Exception as e:
-        print(f"Erro ao processar dados: {e}")
-        return None, None
+    return None, None
+
 
 def melhor_ataque(df_tabela):
     try:
-        melhor_ataque = df_tabela.loc[df_tabela['GP'].idxmax()]
-        return melhor_ataque
-    except Exception as e:
-        print(f"Erro ao obter dados: {e}")
+        return df_tabela.loc[df_tabela["GP"].idxmax()]
+    except Exception as erro:
+        print(f"Erro ao obter melhor ataque: {erro}")
         return None
+
 
 def melhor_defesa(df_tabela):
     try:
-        melhor_defesa = df_tabela.loc[df_tabela['GC'].idxmin()]
-        return melhor_defesa
-    except Exception as e:
-        print(f"Erro ao obter dados: {e}")
+        return df_tabela.loc[df_tabela["GC"].idxmin()]
+    except Exception as erro:
+        print(f"Erro ao obter melhor defesa: {erro}")
         return None
+
 
 def obter_dados_artilheiros(codigo_liga, escolha_season):
     try:
-        url = f"https://api.football-data.org/v4/competitions/{codigo_liga}/scorers"
-        headers = {
-            "X-Auth-Token": st.secrets["API_TOKEN"]
-        }
-        params = {
-            "season": escolha_season
-        }
-        
-        response = requests.get(url, headers=headers, params=params)
-        dados = response.json()
-        
-        tabela_formatada = []
-        
-        if 'scorers' in dados:
-            for item in dados['scorers']:
-                dados_time = {
-                    "nome": item['player']['name'],
-                    "gols": item['goals'],
-                    "time": item['team']['name'],
-                    "escudo": item['team']['crest']
-                }
-                tabela_formatada.append(dados_time)
-                
-        return tabela_formatada 
-    except Exception as e:
-        print(f"Erro ao obter dados: {e}")
-        return None 
+        dados = _buscar_api("scorers", codigo_liga, escolha_season)
+        if not dados or "scorers" not in dados:
+            return None
+
+        return [
+            {
+                "nome": item["player"]["name"],
+                "gols": item["goals"],
+                "time": item["team"]["name"],
+                "escudo": item["team"]["crest"],
+            }
+            for item in dados["scorers"]
+        ]
+    except Exception as erro:
+        print(f"Erro ao obter artilheiros: {erro}")
+        return None
+
 
 def obter_dados_historicos(codigo_liga, temporada_atual):
-    """
-    Busca dados da temporada atual e das 2 anteriores.
-    Retorna um dicionario: { '2025': [dados], '2024': [dados], ... }
-    """
     historico = {}
+
     try:
         ano_atual = int(temporada_atual)
-        # 3 years including current
-        anos = range(ano_atual, ano_atual - 3, -1) 
-        
-        for ano in anos:
-            dados_ano, _ = obter_dados_ligas(codigo_liga, str(ano))
-            if dados_ano:
-                historico[str(ano)] = dados_ano
-            
-        return historico
-    except Exception as e:
-        print(f"Erro ao obter historico: {e}")
+    except (TypeError, ValueError):
         return historico
 
+    for ano in range(ano_atual, ano_atual - 3, -1):
+        dados_ano, _ = obter_dados_ligas(codigo_liga, str(ano))
+        if dados_ano:
+            historico[str(ano)] = dados_ano
+
+    return historico
